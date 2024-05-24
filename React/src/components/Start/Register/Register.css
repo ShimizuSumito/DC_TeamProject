@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+h1{
+    display: none;
+}
+.left{
+    background-color: #F09D71;
+    width: 40%;
+}
+.left img{
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+    width: 80%;
+    height: 50%;
+}
+p{font-size: 16px;
+    font-family: "meiryo";
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+.right{
+    width: 60%;
+}
+form{
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: fit-content;
+    margin-top: 150px;
+    position: relative;
+
+}
+label{
+    font-size: 20px;
+    font-family: "meiryo";
+}
+
+input{
+    background-color: #F09D7145;
+}
+.block{
+    display: block;
+    width: 70%;
+    height: 30px;
+}
+.nes::before{
+    content: "*";
+    color: red;
+}
+
+.row{
+    margin-top: 20px;
+}
+.gender{
+    margin-left: 10px;
+}
+.region{
+    display: block;
+}
+
+.list{
+    display: block;
+    width: 30%;
+    background-color: #F09D7145;
+}
+button{
+    border: none;
+    color: white;
+    border-radius: 10px;
+    width:150px;
+    height: 50px;
+    background-color: #F09D71;
+    width: 50%;
+    margin-top: 100px;
+    position: absolute;
+    right: 0;
+}
