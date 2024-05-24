@@ -1,0 +1,67 @@
+
+
+
+.Start {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.Logo {
+    text-align: center;
+    margin-bottom: 50px;
+    width: 40%;
+    width: 74vh;
+    height: 100vh;
+    gap: 0px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    background: #F09D71;
+    ;
+}
+.Login {
+    text-align: center;
+    margin-bottom: 50px;
+    width: 40%;
+    color: #F09D71;
+    background: #FFFFFF;
+    display: block;
+    width: 752px;
+    height: 27vh;
+    top: 713.41px;
+    left: -3px;
+    gap: 0px;
+    opacity: 0px;
+    ;
+}
+.frame {
+    background-color: #FFE2AF;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+.Whats {
+    color: #CB6B39;
+    padding: 30px;
+    flex-grow: 1;
+    width: 60%;
+    height: 100vh;
+    line-height: 0;
+
+}
+
+.Whats h2 {
+    padding: 20px;
+}   
+.Whats h3 {
+    padding: 20px;
+}
+
+.Whats p {
+    margin-bottom: 10px;
+    padding: 20px;
+    line-height: 1.5;
+}
