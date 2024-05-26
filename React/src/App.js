@@ -5,6 +5,7 @@ import Start from './components/Start/Start';
 import Register from './components/Start/Register/Register';
 import Weather from "./components/Main/Weather/Weather";
 import Timeline from "./components/Main/Timeline/Timeline";
+import Check from "./components/Start/Register/Check";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/Main/Weather" element={<Weather />}/>
         <Route path="/Main/Timeline" element={<Timeline />}/>
         <Route path='/Register' element={<Register />} />
+        <Route path="/Check" element={<Check />} />
       </Routes>
     </Router>
     </>

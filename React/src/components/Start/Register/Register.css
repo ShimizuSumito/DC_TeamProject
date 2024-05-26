@@ -1,0 +1,99 @@
+.register .start-right{
+    padding: 50px ;
+}
+
+.register .start-header{
+    height: 100vh;
+    padding: 100px;
+}
+.register-form{
+    display: grid;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+
+}
+.register input{
+    display: block;
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+.register label{
+    color: black;
+}
+.register input {
+    text-align: left;
+}
+.register select{
+    width: 60%;
+    height: 30px;
+}
+
+select{
+    width: 30%;
+    height: 30px;
+    margin-bottom: 10px;
+    border: 1px solid #F09D71;
+}
+
+label{
+    text-align: left;
+}
+
+.nes::before{
+    content: "*";
+    color: #F09D71;
+}
+.radio-group {
+display: flex;
+align-items: center;
+}
+.radio-group input{
+background-color: #F09D71;
+border: #F09D71 1px solid;
+width: 16px;
+margin-bottom: 0px;
+}
+.radio-group label {
+width: 100px;
+display: flex;
+align-items: center;
+font-size: 16px;
+}
+.tocheck-button{
+    background-color: #F09D71;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 30%;
+    margin: auto;
+
+}
+.form-area{
+    width: 60%;
+    margin-top: 30px !important;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.form-area .tocheck-button{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.return-button{
+    background-color: white;
+    color: #F09D71;
+    border: #F09D71 1px solid;
+}
+.check-text{
+    color: #F09D71;
+    font-size: 12px;
+    margin-left: 10px;
+}
+.register-form{
+    padding-bottom: 0px;
+}
