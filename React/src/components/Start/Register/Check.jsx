@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Check() {
     const navigate = useNavigate();
     const toDatabase = () => {
-        alert("登録が完了しました！");
-        navigate('/Main');
+        navigate('/RegisterSuccess');
     }
     const toReturn = () => {
         navigate('/Register');

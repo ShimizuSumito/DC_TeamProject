@@ -1,42 +1,63 @@
-/* Nav.css */
-*{
-    box-sizing: border-box;
-}
 
-body {
-    margin: 0;
-}
-
-.nav {
-    gap: 2rem;
-    background: #F09D71;
-    align-items: center;
-    height: 65px;
-    display: flex;
-}
-nav {
-    height: 100%;
-}
 
 nav ul {
+    background-color: #F09D71;
+    height: 50px;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    height:50px;
     display: flex; /* 横並びにするために Flexbox を使用 */
     align-items: center;
     justify-content: center; /* リスト項目を均等に分配 */
-    font-size: 30px;
+    font-size: 20px;
+    gap: 10%;
 }
 
 nav ul li {
-    margin-right: 200px; /* リンクの間隔を調整 */   
     color: white;
-  }
-  
-  nav ul li:last-child {
-    margin-right: 0; /* 最後のリンクの間隔を削除 */
-  }
-  
+    text-decoration: none;
+}
+.nav{
+    position: relative;
+}
 
-  
-  
+.hamburger {
+    background-color: #F09D71;
+    border: #F09D71 solid 1px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 10;
+}
+.line {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    padding-top: 100px;
+    padding-left: 30px;
+    opacity: 0.8;
+    background-color: #F09D71;
+    transition: 0.5s;
+    z-index: 2;
+}
+.bg{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 1;
+
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
