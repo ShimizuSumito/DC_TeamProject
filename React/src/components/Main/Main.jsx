@@ -13,9 +13,9 @@ export default function Main() {
     <>
     <Nav />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/weather" element={<Weather />} />
-                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/Main/Home" element={<Home />} />
+                <Route path="/Main/Weather" element={<Weather />} />
+                <Route path="/Main/Timeline" element={<Timeline />} />
             </Routes>
     </>
 
