@@ -1,0 +1,42 @@
+/* Nav.css */
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.nav {
+    gap: 2rem;
+    background: #F09D71;
+    align-items: center;
+    height: 65px;
+    display: flex;
+}
+nav {
+    height: 100%;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* 横並びにするために Flexbox を使用 */
+    align-items: center;
+    justify-content: center; /* リスト項目を均等に分配 */
+    font-size: 30px;
+}
+
+nav ul li {
+    margin-right: 200px; /* リンクの間隔を調整 */   
+    color: white;
+  }
+  
+  nav ul li:last-child {
+    margin-right: 0; /* 最後のリンクの間隔を削除 */
+  }
+  
+
+  
+  
