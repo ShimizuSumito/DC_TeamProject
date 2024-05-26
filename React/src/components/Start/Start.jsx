@@ -4,9 +4,12 @@ import img from "../../commons/img/girl.jpg";
 import { BrowserRouter as Router, Routes, Route,Link,Navigate, useNavigate } from 'react-router-dom';
 
 const Start = () => {
-    const navuigate = useNavigate();
+    const navigate = useNavigate();
     const tologin = () => {
-        navuigate('/Main');
+        navigate('/Main');
+    }
+    const toRegister = () => {
+        navigate('/Register');
     }
     return (
         <div className='Start'>
@@ -31,7 +34,7 @@ const Start = () => {
                         </form>
                         <div className='button'>
                             <button className='login-button' onClick={tologin}>ログイン</button>
-                            <button className='register'>新規登録</button>
+                            <button className='register' onClick={toRegister}>新規登録</button>
                         </div>
                     </div>
                 </section>
