@@ -1,0 +1,68 @@
+.top-text{
+    color: #F09D71;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.weather{
+
+    color: white;
+}
+.weather_content{
+        background-color: lightblue;
+        padding: 30px;
+    font-weight: normal;
+}
+.weather_content p{
+    font-size: 50px;
+    font-weight: bold;
+}
+.weather_content date{
+    font-size: 30px;
+    font-weight: bold;
+}
+.weather_content h4{
+    font-size: 20px;
+    font-weight: bold;
+}
+.weather_week{
+    display: flex;
+    justify-content: space-around;
+
+}
+.weather_week .day img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+.day{
+    text-align: center;
+    background-color: lightblue;
+    padding: 20px;
+    margin-right: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.day:not(:first-child)  {
+    margin-left: 20px;
+    margin-top: auto;
+    margin-bottom: 6px;
+}
+.day:not(:first-child) p{
+    font-weight: lighter;
+    font-size: 30px;
+}
+.weather-button{
+    display: block;
+    width: 200px;
+    font-size: 16px;
+    font-weight: bolder;
+    background-color: white;
+    border-radius: 10px;
+    height: 50px;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left: auto;
+}

@@ -12,7 +12,6 @@ import Timeline from "./Timeline/Timeline";
 export default function Main() {
     return(
     <>
-    <Nav />
     <Home />
     </>
     )

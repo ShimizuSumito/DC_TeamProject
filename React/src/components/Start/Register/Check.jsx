@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Value } from "sass";
 import img from "../../../commons/img/girl.jpg";
 import { useNavigate, useLocation } from "react-router-dom";
 export default function Check() {
