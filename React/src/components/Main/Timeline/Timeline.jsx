@@ -5,6 +5,7 @@ export default function Timeline() {
 
     return(
         <div>
+            <Nav />
             <h1>Timeline</h1>
         </div>
     )

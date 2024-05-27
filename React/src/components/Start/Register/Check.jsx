@@ -9,18 +9,26 @@ export default function Check() {
     const [newStock, setNewStock] = useState();
     
     const userData = location.state;
-    const formdata = new FormData(userData);
+    // const formdata = new FormData(userData);
 
     const handleSubmit = async(event) => {
         event.preventDefault();
+        // const newStock = {
+        //     user: formdata.get(`name`),
+        //     mailaddress: formdata.get(`mailaddress`),
+        //     gender: formdata.get(`gender`),
+        //     password: formdata.get(`password`),
+        //     generation:formdata.get(`generation`),
+        //     password: formdata.get(`password`),
+        //     region: formdata.get(`region`)
+        // };
         const newStock = {
-            user: formdata.get(`name`),
-            mailaddress: formdata.get(`mailaddress`),
-            gender: formdata.get(`gender`),
-            password: formdata.get(`password`),
-            generation:formdata.get(`generation`),
-            password: formdata.get(`password`),
-            region: formdata.get(`region`)
+            user: userData.name,
+            mailaddress: userData.mailaddress,
+            gender: userData.gender,
+            password: userData.password,
+            generation: userData.generation,
+            region: userData.region
         };
         toDatabase(newStock);
     };
@@ -67,26 +75,26 @@ export default function Check() {
                 <form className='register-form' onSubmit={handleSubmit}>
                     <label className='nes'>
                         お名前(アカウント名)
-                        <p className="check-text">{FormData.name}</p>
+                        <p className="check-text">{userData.name}</p>
                     </label>
                     <label className='nes'>
                         メールアドレス(ログインID)
-                        <p className="check-text">{FormData.mailaddress}</p>
+                        <p className="check-text">{userData.mailaddress}</p>
                     </label>
                     <label className='nes'>
                         パスワード
-                        <p className="check-text">{FormData.password}</p>
+                        <p className="check-text">{userData.password}</p>
                     </label>
                     <label>性別
-                    <p className="check-text">{FormData.gender}</p>
+                    <p className="check-text">{userData.gender}</p>
                     </label>
                     <label>
                         年代
-                        <p className="check-text">{FormData.generation}</p>
+                        <p className="check-text">{userData.generation}</p>
                     </label>
                     <label>
                         地域<br />
-                        <p className="check-text">{FormData.region}</p>
+                        <p className="check-text">{userData.region}</p>
                     </label>
                     <div className="form-area">
                     <button className='tocheck-button return-button' onClick={toReturn}>戻る</button>
