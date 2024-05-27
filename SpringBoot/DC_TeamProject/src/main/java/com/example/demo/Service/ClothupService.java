@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Data.Clothes;
+import com.example.demo.Data.Timeline;
 import com.example.demo.Data.UserDatabase;
+import com.example.demo.Interface.ClothesInterface;
 import com.example.demo.Interface.UserDatabaseInterface;
 import com.example.demo.Repositories.ClothupClothesRepository;
+import com.example.demo.Repositories.ClothupTimelineRepository;
 import com.example.demo.Repositories.ClothupUserDatabaseRepository;
 
 @Service
@@ -17,10 +20,8 @@ public class ClothupService {
 	private ClothupUserDatabaseRepository userDatabaseRepository;
 	@Autowired
 	private ClothupClothesRepository clothesRepository;
-	public List<Clothes> GetClothes(String mailAddress) {
-		// TODO 自動生成されたメソッド・スタブ
-		return clothesRepository.findByMailaddress(mailAddress);
-	}
+	@Autowired
+	private ClothupTimelineRepository timelineRepository;
 	public List<? extends UserDatabaseInterface> GetUserData() {
 		// TODO 自動生成されたメソッド・スタブ
 		return userDatabaseRepository.findAll();
@@ -67,5 +68,106 @@ public class ClothupService {
 	public UserDatabaseInterface FindUser(String mailaddress) {
 		// TODO 自動生成されたメソッド・スタブ
 		return userDatabaseRepository.findByMailaddress(mailaddress);
+	}
+	public List<Clothes> GetClothes(String mailAddress) {
+		// TODO 自動生成されたメソッド・スタブ
+		return clothesRepository.findByMailaddress(mailAddress);
+	}
+	public ClothesInterface FindClothes(int id) {
+		return clothesRepository.findById(id);
+	}
+	public boolean AddClothes(Clothes addClothes) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			clothesRepository.saveAndFlush(addClothes);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public boolean DeleteClothes(Clothes deleteClothes) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			clothesRepository.delete(deleteClothes);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public boolean UpdateClothes(Clothes updateClothes) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			clothesRepository.saveAndFlush(updateClothes);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public List<Timeline> GetTimeline() {
+		// TODO 自動生成されたメソッド・スタブ
+		return timelineRepository.findAll();
+	}
+	public List<Timeline> FindLocationTimeline(String location) {
+		// TODO 自動生成されたメソッド・スタブ
+		return timelineRepository.findByLocation(location);
+	}
+	public List<Timeline> FindSituationTimeline(String situation) {
+		// TODO 自動生成されたメソッド・スタブ
+		return timelineRepository.findBySituation(situation);
+	}
+	public boolean AddTimeline(Timeline addTimeline) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			timelineRepository.saveAndFlush(addTimeline);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public boolean DeleteTimeline(Timeline deleteTimeline) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			timelineRepository.delete(deleteTimeline);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public boolean UpdateTimeline(Timeline updateTimeline) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			timelineRepository.saveAndFlush(updateTimeline);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
+	}
+	public List<Timeline> FindIdTimeline(int id) {
+		// TODO 自動生成されたメソッド・スタブ
+		return timelineRepository.findById(id);
 	}
 }
