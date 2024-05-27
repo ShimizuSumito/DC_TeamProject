@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Data.Clothes;
+import com.example.demo.Data.Timeline;
 import com.example.demo.Data.UserDatabase;
 import com.example.demo.Interface.ClothesInterface;
 import com.example.demo.Interface.UserDatabaseInterface;
@@ -88,5 +89,54 @@ public class CloseupController {
 	public boolean UpdateClothes(Clothes updateClothes)
 	{
 		return service.UpdateClothes(updateClothes);
+	}
+	
+	@GetMapping("/Timeline/Get")
+	@CrossOrigin
+	public List<Timeline> GetTimeline()
+	{
+		return service.GetTimeline();
+	}
+	
+	@GetMapping("Timeline/Find/id/{id}")
+	@CrossOrigin
+	public List<Timeline> FindIdTimeline(@PathVariable int id)
+	{
+		return service.FindIdTimeline(id);
+	}
+	
+	@GetMapping("/Timeline/Find/location/{location}")
+	@CrossOrigin
+	public List<Timeline> FindLocationTimeline(@PathVariable String location)
+	{
+		return service.FindLocationTimeline(location);
+	}
+	
+	@GetMapping("/Timeline/Find/situation/{situation}")
+	@CrossOrigin
+	public List<Timeline> FindSituationTimeline(@PathVariable String situation)
+	{
+		return service.FindSituationTimeline(situation);
+	}
+	
+	@PostMapping("Timeline/Add")
+	@CrossOrigin
+	public boolean AddTimeline(Timeline addTimeline)
+	{
+		return service.AddTimeline(addTimeline);
+	}
+	
+	@PostMapping("Timeline/Delete")
+	@CrossOrigin
+	public boolean DeleteTimeline(Timeline deleteTimeline)
+	{
+		return service.DeleteTimeline(deleteTimeline);
+	}
+	
+	@PostMapping("Timeline/Update")
+	@CrossOrigin
+	public boolean UpdateTimeline(Timeline updateTimeline)
+	{
+		return service.UpdateTimeline(updateTimeline);
 	}
 }
