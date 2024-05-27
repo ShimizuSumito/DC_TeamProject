@@ -20,7 +20,6 @@ function App() {
         <Route path="/Main" element={<Main />}/>
         <Route path="/Main/Weather" element={<Weather />}/>
         <Route path="/Main/Timeline" element={<Timeline />}/>
-
         <Route path="/Main/MyPage" element={<Mypage />} />
       </Routes>
     </Router>
