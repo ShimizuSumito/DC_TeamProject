@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Interface.ClotersInterface;
+import com.example.demo.Data.Clothes;
 import com.example.demo.Interface.UserDatabaseInterface;
 import com.example.demo.Service.ClothupService;
 
@@ -20,13 +21,13 @@ public class CloseupController {
 	@CrossOrigin
 	public List<? extends UserDatabaseInterface> GetUser()
 	{
-		return null;
+		return service.GetUserData();
 	}
 	
-	@GetMapping("/GetCloters")
+	@GetMapping("/GetClothes/{mailaddress}")
 	@CrossOrigin
-	public List<? extends ClotersInterface> GetCloters()
+	public List<Clothes> GetClothes(@PathVariable String mailaddress)
 	{
-		return null;
+		return service.GetClothes(mailaddress);
 	}
 }

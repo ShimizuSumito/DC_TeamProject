@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.Data.UserDatabase;
 
 @Repository
-public interface ClothupUserDatabaseRepository extends JpaRepository<UserDatabase,Integer>  {
+public interface ClothupUserDatabaseRepository extends JpaRepository<UserDatabase,String>  {
 
 }
