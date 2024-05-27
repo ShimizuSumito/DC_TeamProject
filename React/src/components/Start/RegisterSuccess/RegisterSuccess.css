@@ -1,0 +1,23 @@
+.RegisterSuccess {
+    align-items: center;
+    justify-self: center;
+    color: white;
+    background: #A5D4D2;
+    height: 100vh;
+
+}
+ha::first-line {
+    color: blueviolet;
+}
+
+br + * {
+    clear: left;
+  }
+  
+
+.RegisterSuccess p{
+    color: #F09D71;
+    background-color: rgba(255, 255, 255, 0.5); /* 薄い背景色を指定 */      
+    text-align: center;
+    margin: 50px;
+}
