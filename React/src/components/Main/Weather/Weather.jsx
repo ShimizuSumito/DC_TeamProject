@@ -5,7 +5,6 @@ export default function Weather() {
 
     return(
     <>
-        <Nav />
         <h1>Weather</h1>
     </>
 

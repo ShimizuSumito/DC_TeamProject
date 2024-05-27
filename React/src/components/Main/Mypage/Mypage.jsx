@@ -5,8 +5,6 @@ import './Mypage.css';
 const Mypage = () => {
     return (
         <div>
-            
-            <Nav />
             <h2>MyCloth</h2>
             <div className="card-list">
                 <div className="card">
