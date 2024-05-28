@@ -177,4 +177,18 @@ public class ClothupService {
 		// TODO 自動生成されたメソッド・スタブ
 		return timelineRepository.findById(id);
 	}
+	public UserDatabase findByAddressAndPassword(String address, String password) {
+		// TODO 自動生成されたメソッド・スタブ
+		return userDatabaseRepository.findByMailaddressAndPassword(address, password);
+	}
+	public List<Clothes> SearchCloths(int temperature, String location, String situation) {
+		// TODO 自動生成されたメソッド・スタブ
+		List<Clothes> list = clothesRepository.findByMinTemperatureLessThanEqualAndMaxTemperatureGreaterThanEqual(temperature, temperature);
+		List<Clothes> ret = null;
+		for (Clothes c : list)
+		{
+			if ((c.location == location) && (c.situation == situation)) ret.add(c);
+		}
+		return ret;
+	}
 }
