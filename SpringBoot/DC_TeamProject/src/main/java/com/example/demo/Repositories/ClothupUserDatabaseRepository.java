@@ -11,4 +11,6 @@ public interface ClothupUserDatabaseRepository extends JpaRepository<UserDatabas
 
 	UserDatabaseInterface findByMailaddress(String mailaddress);
 
+	UserDatabase findByMailaddressAndPassword(String address, String password);
+
 }
