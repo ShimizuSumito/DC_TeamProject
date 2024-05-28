@@ -12,6 +12,8 @@ import ClothRegister from './components/Main/ClothRegister/ClothRegister';
 import Nav from './components/Main/Nav/Nav'; 
 import RegisterSuccess from './components/Start/RegisterSuccess/RegisterSuccess';
 import Mypage from'./components/Main/Mypage/Mypage.jsx';
+import Recommend from './components/Main/Recommend/Recommend.jsx';
+import CreateTimeline from './components/Main/CreateTimeline/CreateTimeline.jsx';//なんか知らんけどこれでうごくからOK
 function App() {
   return (
     <>
@@ -41,6 +43,8 @@ function AppContent(){
         <Route path="/Check" element={<Check />}/>
         <Route path="/RegisterSuccess" element={<RegisterSuccess />}/>
         <Route path="/Main/Mypage" element={<Mypage/>}/>
+        <Route path="/Main/Recommend" element={<Recommend/>}/>
+        <Route path="/Main/CreateTimeline" element={<CreateTimeline/>}/>
       </Routes>
     </div>
   );

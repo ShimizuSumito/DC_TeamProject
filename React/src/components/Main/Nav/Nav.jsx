@@ -37,7 +37,7 @@ const Nav = () => {
                 <div className='sidebar'>
                     <ul>
                         <li>
-                            <Link to="/Main/MyCloth" style={{ textDecoration: 'none',color:'white' }}>アカウント情報</Link>
+                            <Link to="/Main/Mypage" style={{ textDecoration: 'none',color:'white' }}>アカウント情報</Link>
                         </li>
                         <li>
                             <Link to="/Main/timeline" style={{ textDecoration: 'none',color:'white' }}>お問い合わせ</Link>

@@ -1,49 +1,60 @@
 import React from 'react';
 import './Choose.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function Choose() {
+  const Navigate = useNavigate();
 
-
-const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     color: '',
-    category: '',
     location: '',
     situation: '',
+    temprature: '',
   });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // 森嵜が追加
 
   const [selectedButtons, setSelectedButtons] = useState({
     color: '',
-    category: '',
     location: '',
     situation: '',
+    temprature: '',
   });
 
   const handleButtonClick = (category, value) => {
+
     setSelectedButtons({ ...selectedButtons, [category]: value });
   };
 
-// ここまで
+  const handleSubmit = async () => {
+    console.log('form Data:', formData);
+    Navigate("/Main/Recommend");
+    const dataToSend = {
+      ...formData,
+      ...selectedButtons
+    };
 
-  const handleSubmit = () => {
-    console.log('Selected Data:', formData);
-    // Here you can handle the form data as needed, e.g., send it to a server or update the UI
-    console.log('Selected Data:', selectedButtons);
+    try {
+      const response = await fetch('YOUR_ENDPOINT_URL', { // エンドポイントのURLを指定してください
+        method: 'POST', // メソッドをPOSTに設定
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Success:', result);
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
-
-
-    
-return (
+  return (
     <div className="Choose">
       <h2>服を選ぶ！</h2>
       <div className="container">
@@ -52,11 +63,13 @@ return (
           <div>
             {['仕事', 'デート', 'お出かけ', '飲み会', '運動'].map((situation) => (
               <button
-                className={formData.situation === situation ? 'ColorButton active' : 'ColorButton'}
-                // 森嵜が変更　'ColorButton'
+                className={selectedButtons.situation === situation ? 'ColorButton active' : 'ColorButton'}
                 type="button"
                 key={situation}
-                onClick={() => setFormData({ ...formData, situation })}
+                onClick={() => {
+                  handleButtonClick('situation', situation);
+                  setFormData({ ...formData, situation });
+                }}
               >
                 {situation}
               </button>
@@ -66,13 +79,16 @@ return (
         <div className="section">
           <label>カラー</label>
           <div>
-            {['Yellow', 'Pink', 'Blue', 'Red','Orange','Green','Purple','Brown','Gray','White','Black'].map((color) => (
+            {['Yellow', 'Pink', 'Blue', 'Red', 'Orange', 'Green', 'Purple', 'Brown', 'Gray', 'White', 'Black'].map((color) => (
               <button
-                type={selectedButtons.color === color ? 'ColorButton active' : 'ColorButton'}
-                // 森嵜が追加　"button"
+                className={selectedButtons.color === color ? 'ColorButton active' : 'ColorButton'}
+                type="button"
                 key={color}
-                style={{color:'white', backgroundColor: color,textShadow: '0 0  5px black',fontWeight: '200px', border: selectedButtons.color === color ? '2px solid black' : 'none'}} // カラーボタンの背景色を指定
-                onClick={() => setFormData({ ...formData, color })}
+                style={{ color: 'white', backgroundColor: color, textShadow: '0 0 5px black', fontWeight: '200px', border: selectedButtons.color === color ? '2px solid black' : 'none' }}
+                onClick={() => {
+                  handleButtonClick('color', color);
+                  setFormData({ ...formData, color });
+                }}
               >
                 {color}
               </button>
@@ -84,13 +100,34 @@ return (
           <div>
             {['札幌', '仙台', '東京', '名古屋', '大阪', '広島', '福岡', '沖縄'].map((location) => (
               <button
-              className={selectedButtons.location === location ? 'ColorButton active' : 'ColorButton'}
-              type="button"
-              key={location}
-              onClick={() => handleButtonClick('location', location)}
-            >
-              {location}
-            </button>
+                className={selectedButtons.location === location ? 'ColorButton active' : 'ColorButton'}
+                type="button"
+                key={location}
+                onClick={() => {
+                  handleButtonClick('location', location);
+                  setFormData({ ...formData, location });
+                }}
+              >
+                {location}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="section">
+          <label>気温</label>
+          <div>
+            {['0～10℃', '11～20℃', '21～30℃'].map((temprature) => (
+              <button
+                className={selectedButtons.temprature === temprature ? 'ColorButton active' : 'ColorButton'}
+                type="button"
+                key={temprature}
+                onClick={() => {
+                  handleButtonClick('temprature', temprature);
+                  setFormData({ ...formData, temprature });
+                }}
+              >
+                {temprature}
+              </button>
             ))}
           </div>
         </div>
@@ -98,10 +135,9 @@ return (
         <div className='ChooseSubmit'>
           <button onClick={() => setFormData({
             color: '',
-            size: '',
-            category: '',
             location: '',
-            situation: ''
+            situation: '',
+            temprature: ''
           })}>戻る</button>
           <button onClick={handleSubmit} className='OrangeButton'>検索する</button>
         </div>
