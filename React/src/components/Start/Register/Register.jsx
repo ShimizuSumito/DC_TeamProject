@@ -5,22 +5,26 @@ import img from "../../../commons/img/girl.jpg";
 export default function Register() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
+    const [nickname,setNickname] =useState('');
     const [mailaddress, setMailaddress] = useState('');
     const [password, setPassword] = useState('');
     const [gender, setGender] = useState('');
     const [generation, setGeneration] = useState('');
     const [region, setRegion] = useState('');
-    // const [userData, setUserData] = useState();
+    // const [userData, setUserData] = useState([]);
 
+    
     const toCheck = () => {
         const userData = {
             name, 
-            mailaddress, 
-            password, 
+            mailaddress,
             gender, 
-            generation, 
+            generation,
+            password,  
+            nickname,
             region
         }
+        console.log(userData);
         navigate('/Check', {
             state: userData
         });
@@ -38,6 +42,10 @@ export default function Register() {
                     <label className='nes'>
                         お名前(アカウント名)
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+                    </label>
+                    <label className='nes'>
+                        ニックネーム
+                        <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)}/>
                     </label>
                     <label className='nes'>
                         メールアドレス(ログインID)
@@ -62,7 +70,7 @@ export default function Register() {
                             その他
                         </label>
                     </div>
-                    <label className='select'>
+                    <label className='age'>
                         年代<br />   
                         <select className='short-select' value={generation} onChange={(e) => setGeneration(e.target.value)}>
                             <option value="10代">10代</option>
