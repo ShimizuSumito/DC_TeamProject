@@ -1,31 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './Start.css';
 import img from "../../commons/img/logo.png";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Start = () => {
-    const [mailaddress, setMailaddress] = useState('');
-    const [password, setPassword] = useState('');
-    const [data , setData] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:8080/User/Get').then(res => {
-            res.json().then(value => {
-                setData(value);
-                console.log(value);
-            }) 
-        })
-        .catch(err => {
-            console.error(err);
-    });},[]);
-
     const navigate = useNavigate();
     const handleLogin = () => {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].mailaddress === mailaddress && data[i].password === password) {
-                navigate('/Main?name=' + data[i].name);
-            }
-        }
+        navigate('/Main');
     }
     const handleRegister = () => {
         navigate('/Register');
@@ -44,11 +25,11 @@ const Start = () => {
                         <form>
                             <label>
                                 メールアドレス
-                                <input type="email" onChange={(e) => setMailaddress(e.target.value)}/>
+                                <input type="email" />
                             </label>
                             <label>
                                 パスワード
-                                <input type="password" onChange={(e) => setPassword(e.target.value)}/>
+                                <input type="password" />
                             </label>
                         </form>
                         <div className='login-buttons'>
