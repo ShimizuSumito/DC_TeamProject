@@ -19,10 +19,28 @@ const [formData, setFormData] = useState({
     }));
   };
 
+  // 森嵜が追加
+
+  const [selectedButtons, setSelectedButtons] = useState({
+    color: '',
+    category: '',
+    location: '',
+    situation: '',
+  });
+
+  const handleButtonClick = (category, value) => {
+    setSelectedButtons({ ...selectedButtons, [category]: value });
+  };
+
+// ここまで
+
   const handleSubmit = () => {
     console.log('Selected Data:', formData);
     // Here you can handle the form data as needed, e.g., send it to a server or update the UI
+    console.log('Selected Data:', selectedButtons);
   };
+
+
 
     
 return (
@@ -32,14 +50,15 @@ return (
         <div className="section">
           <label>シチュエーション</label>
           <div>
-            {['仕事', 'デート', 'お出かけ', '飲み会', '運動'].map((location) => (
+            {['仕事', 'デート', 'お出かけ', '飲み会', '運動'].map((situation) => (
               <button
-                className='ColorButton'
+                className={formData.situation === situation ? 'ColorButton active' : 'ColorButton'}
+                // 森嵜が変更　'ColorButton'
                 type="button"
-                key={location}
-                onClick={() => setFormData({ ...formData, location })}
+                key={situation}
+                onClick={() => setFormData({ ...formData, situation })}
               >
-                {location}
+                {situation}
               </button>
             ))}
           </div>
@@ -49,8 +68,10 @@ return (
           <div>
             {['Yellow', 'Pink', 'Blue', 'Red','Orange','Green','Purple','Brown','Gray','White','Black'].map((color) => (
               <button
-                type="button"
+                type={selectedButtons.color === color ? 'ColorButton active' : 'ColorButton'}
+                // 森嵜が追加　"button"
                 key={color}
+                style={{color:'white', backgroundColor: color,textShadow: '0 0  5px black',fontWeight: '200px', border: selectedButtons.color === color ? '2px solid black' : 'none'}} // カラーボタンの背景色を指定
                 onClick={() => setFormData({ ...formData, color })}
               >
                 {color}
@@ -59,16 +80,17 @@ return (
           </div>
         </div>
         <div className="section">
-          <label>場所</label>
+          <label>行先</label>
           <div>
             {['札幌', '仙台', '東京', '名古屋', '大阪', '広島', '福岡', '沖縄'].map((location) => (
               <button
-                type="button"
-                key={location}
-                onClick={() => setFormData({ ...formData, location })}
-              >
-                {location}
-              </button>
+              className={selectedButtons.location === location ? 'ColorButton active' : 'ColorButton'}
+              type="button"
+              key={location}
+              onClick={() => handleButtonClick('location', location)}
+            >
+              {location}
+            </button>
             ))}
           </div>
         </div>

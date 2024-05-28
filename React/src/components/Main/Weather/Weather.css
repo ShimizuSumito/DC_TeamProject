@@ -1,4 +1,4 @@
-.top-text {
+.top-text{
     color: #F09D71;
     font-size: 20px;
     font-weight: bold;
@@ -6,40 +6,38 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
+.weather{
 
-.weather_content {
-    background-color: lightblue;
-    padding: 30px;
+    color: white;
+}
+.weather_content{
+        background-color: lightblue;
+        padding: 30px;
     font-weight: normal;
 }
-
-.weather_content p {
+.weather_content p{
     font-size: 50px;
     font-weight: bold;
 }
-
-.weather_content date {
+.weather_content date{
     font-size: 30px;
     font-weight: bold;
 }
-
-.weather_content h4 {
+.weather_content h4{
     font-size: 20px;
     font-weight: bold;
 }
-
-.weather_week {
+.weather_week{
     display: flex;
     justify-content: space-around;
-}
 
-.weather_week .day img {
+}
+.weather_week .day img{
     width: 50px;
     height: 50px;
     border: 1px solid black;
 }
-
-.day {
+.day{
     text-align: center;
     background-color: lightblue;
     padding: 20px;
@@ -47,19 +45,16 @@
     font-size: 20px;
     font-weight: bold;
 }
-
-.day:not(:first-child) {
+.day:not(:first-child)  {
     margin-left: 20px;
     margin-top: auto;
     margin-bottom: 6px;
 }
-
-.day:not(:first-child) p {
+.day:not(:first-child) p{
     font-weight: lighter;
     font-size: 30px;
 }
-
-.weather-button {
+.weather-button{
     display: block;
     width: 200px;
     font-size: 16px;
@@ -70,21 +65,4 @@
     margin-top: 50px;
     margin-right: 50px;
     margin-left: auto;
-}
-
-/* 修正 */
-.weather-section {
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
-.weather-section.active {
-    display: flex;
-}
-
-.weather-section:not(.active) {
-    display: none;
 }

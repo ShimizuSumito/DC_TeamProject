@@ -7,7 +7,9 @@ export default function Check() {
     const [errorMessage, setErrorMessage] = useState('');
     const [newStock, setNewStock] = useState();
     
+    console.log(location.state);
     const userData = location.state;
+    console.log(userData);
 
 
     const handleSubmit = async(event) => {
@@ -32,7 +34,7 @@ export default function Check() {
                 headers: {
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify(newStock),
+                body: JSON.stringify(newStock.nameaddress),
             });
 
             console.log(newStock);
