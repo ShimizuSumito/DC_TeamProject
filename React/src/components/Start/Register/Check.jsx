@@ -7,26 +7,20 @@ export default function Check() {
     const [errorMessage, setErrorMessage] = useState('');
     const [newStock, setNewStock] = useState();
     
+    console.log(location.state);
     const userData = location.state;
-    // const formdata = new FormData(userData);
+    console.log(userData);
+
 
     const handleSubmit = async(event) => {
         event.preventDefault();
-        // const newStock = {
-        //     user: formdata.get(`name`),
-        //     mailaddress: formdata.get(`mailaddress`),
-        //     gender: formdata.get(`gender`),
-        //     password: formdata.get(`password`),
-        //     generation:formdata.get(`generation`),
-        //     password: formdata.get(`password`),
-        //     region: formdata.get(`region`)
-        // };
         const newStock = {
-            user: userData.name,
+            name: userData.name,
             mailaddress: userData.mailaddress,
             gender: userData.gender,
-            password: userData.password,
             generation: userData.generation,
+            password: userData.password,
+            nickname: userData.nickname,
             region: userData.region
         };
         toDatabase(newStock);
@@ -34,15 +28,16 @@ export default function Check() {
 
     const toDatabase = async (newStock) => {
         try {
+            console.log(JSON.stringify(newStock));
             const response = await fetch('http://localhost:8080/User/Add', {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify(newStock),
+                body: JSON.stringify(newStock.nameaddress),
             });
 
-            console.log(location.state);
+            console.log(newStock);
             
             if (response.ok) {
                 navigate('/RegisterSuccess');
@@ -77,6 +72,10 @@ export default function Check() {
                         <p className="check-text">{userData.name}</p>
                     </label>
                     <label className='nes'>
+                        ニックネーム
+                        <p className="check-text">{userData.nickname}</p>
+                    </label>
+                    <label className='nes'>
                         メールアドレス(ログインID)
                         <p className="check-text">{userData.mailaddress}</p>
                     </label>
@@ -97,7 +96,7 @@ export default function Check() {
                     </label>
                     <div className="form-area">
                     <button className='tocheck-button return-button' onClick={toReturn}>戻る</button>
-                    <button className='tocheck-button' onClick={toDatabase} type="submit">完了</button>
+                    <button className='tocheck-button' type="submit">完了</button>
                     </div>
                 </form>
             </section>
