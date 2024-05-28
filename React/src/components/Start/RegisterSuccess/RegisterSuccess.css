@@ -4,7 +4,7 @@
     color: white;
     background: #A5D4D2;
     height: 100vh;
-    background-image: url("C:/開発ここ/React/src/commons/img/WelcomePage2.png");
+    background-image: url("../../../commons/img/WelcomePage2.png");
     background-size: cover; /* 背景画像を要素全体に広げる */
     background-position: center; /* 背景画像を中央に配置 */
     display: flex;
