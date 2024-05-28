@@ -14,7 +14,6 @@ import jakarta.persistence.Table;
 public class UserDatabase implements UserDatabaseInterface{
 	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public String mailaddress;
 	@Column
 	public String name;
@@ -29,14 +28,14 @@ public class UserDatabase implements UserDatabaseInterface{
     @Column
     public String region; 
     
-    public String GetMailaddress()
+    public String getMailaddress()
     {
     	return mailaddress;
     }
     
-    public void SetMailaddress(String mailAddress)
+    public void setMailaddress(String mailaddress)
     {
-    	this.mailaddress = mailAddress;
+    	this.mailaddress = mailaddress;
     }
     
     public String GetName()

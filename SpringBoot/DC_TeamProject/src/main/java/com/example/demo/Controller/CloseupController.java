@@ -37,9 +37,10 @@ public class CloseupController {
 	}
 	
 	@PostMapping("User/Add")
-	@CrossOrigin
+    @CrossOrigin
 	public boolean AddUser(@RequestBody UserDatabase newUser)
 	{
+		System.out.println("AddUser");
 		return service.AddUser(newUser);
 	}
 

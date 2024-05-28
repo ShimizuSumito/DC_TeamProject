@@ -14,6 +14,8 @@ import com.example.demo.Repositories.ClothupClothesRepository;
 import com.example.demo.Repositories.ClothupTimelineRepository;
 import com.example.demo.Repositories.ClothupUserDatabaseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ClothupService {
 	@Autowired
@@ -26,11 +28,16 @@ public class ClothupService {
 		// TODO 自動生成されたメソッド・スタブ
 		return userDatabaseRepository.findAll();
 	}
+	
+	@Transactional
 	public boolean AddUser(UserDatabase newUser) {
 		// TODO 自動生成されたメソッド・スタブ
 		try 
 		{
+			System.out.println("AddUser");
+			System.out.println(newUser.mailaddress);
 			userDatabaseRepository.saveAndFlush(newUser);
+			System.out.println("AddUser");
 			return true;
 		}
 		catch(Exception e)

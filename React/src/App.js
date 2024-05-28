@@ -40,7 +40,7 @@ function AppContent(){
         <Route path="/Register" element={<Register />}/>
         <Route path="/Check" element={<Check />}/>
         <Route path="/RegisterSuccess" element={<RegisterSuccess />}/>
-        <Route path="/Main/Mypage" element={<Mypage/>}/>
+        <Route path="/Main/Mypage/" element={<Mypage/>}/>
       </Routes>
     </div>
   );

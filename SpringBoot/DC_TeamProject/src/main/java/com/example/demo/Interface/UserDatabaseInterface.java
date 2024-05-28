@@ -1,9 +1,9 @@
 package com.example.demo.Interface;
 
 public interface UserDatabaseInterface {
-    public String GetMailaddress();
+    public String getMailaddress();
     
-    public void SetMailaddress(String mailAddress);
+    public void setMailaddress(String mailaddress);
     
     public String GetName();
     
