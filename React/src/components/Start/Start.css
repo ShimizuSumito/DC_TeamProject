@@ -12,20 +12,26 @@
 
 .start-header{
     text-align: center;
-    background-color:#F09D71;
+    background-color :#FDE9DD;
 }
 .start-header h1{
-    color: white !important;
+    color: black !important;
     font-size: 2.5rem;
     padding: 1rem;
 }
+.logospan {
+    color: #E57E0A;
+    ;
+}
+
 .start-header p{
-    color: white !important;
+    color: #F09D71 !important;
     font-size: 1.5rem;
     padding: 1rem;
+    font-weight: bold;
 }
 .start-header img {
-max-width: 150px;
+max-width: 200px;
 }
 .login-section{
     margin-top: 20px;

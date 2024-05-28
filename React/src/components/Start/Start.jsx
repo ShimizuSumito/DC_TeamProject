@@ -1,6 +1,6 @@
 import React from 'react';
 import './Start.css';
-import img from "../../commons/img/girl.jpg";
+import img from "../../commons/img/logo.png";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Start = () => {
@@ -15,7 +15,7 @@ const Start = () => {
         <div className='start-container'>
             <section className='start-left'>
                 <div className='start-header'>
-                    <h1>Cloth Up!</h1>
+                    <h1><span className='logospan'>C</span>loth <span className='logospan'>U</span>p!</h1>
                     <img src={img} alt="Cloth Up logo" />
                     <p>Hello!</p>
                 </div>
