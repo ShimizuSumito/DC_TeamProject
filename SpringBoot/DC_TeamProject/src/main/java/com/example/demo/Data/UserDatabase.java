@@ -10,90 +10,88 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "user_data")
 public class UserDatabase implements UserDatabaseInterface{
-	@Column(name="name")
-	private String name;
 	@Id
-    @Column(nullable = false, unique = true, name="mailaddress")
-	private String mailaddress;
-    @Column(name="gender")
-    private String gender;
-    @Column(name="generation")
-    private String generation;
-    @Column(name="password")
-    private String password;
-    @Column(name="nickname")
-    private String nickname;
-    @Column(name="region")
-    private String region; 
-    
-    public UserDatabase() {}
+	@Column
+	public String mailaddress;
+	@Column
+	public String name;
+    @Column
+    public String gender;
+    @Column
+    public String generation;
+    @Column
+    public String password;
+    @Column
+    public String nickname;
+    @Column
+    public String region; 
     
     public String getMailaddress()
     {
     	return mailaddress;
     }
     
-    public void setMailaddress(String mailAddress)
+    public void setMailaddress(String mailaddress)
     {
-    	this.mailaddress = mailAddress;
+    	this.mailaddress = mailaddress;
     }
     
-    public String getName()
+    public String GetName()
     {
     	return name;
     }
     
-    public void setName(String name)
+    public void SetName(String name)
     {
     	this.name = name;
     }
     
-    public String getGender()
+    public String GetGender()
     {
     	return gender;
     }
     
-    public void setGender(String gender)
+    public void SetGender(String gender)
     {
     	this.gender = gender;
     }
     
-    public String getGeneration()
+    public String GetGeneratuion()
     {
     	return generation;
     }
     
-    public void setGeneration(String generation)
+    public void SetGeneration(String generation)
     {
     	this.generation = generation;
     }
     
-    public String getPassword()
+    public String GetPassword()
     {
     	return password;
     }
     
-    public void setPassword(String password)
+    public void SetPassword(String password)
     {
     	this.password = password;
     }
     
-    public String getNickname()
+    public String GetNickname()
     {
     	return nickname;
     }
     
-    public void setNickname(String nickname)
+    public void SetNickname(String nickname)
     {
     	this.nickname = nickname;
     }
     
-    public String getRegion()
+    public String GetRegion()
     {
     	return region;
     }
     
-    public void setRegion(String region)
+    public void SetRegion(String region)
     {
     	this.region = region;
     }

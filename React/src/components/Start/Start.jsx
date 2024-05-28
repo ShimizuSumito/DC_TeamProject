@@ -1,21 +1,42 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import './Start.css';
-import img from "../../commons/img/girl.jpg";
+import img from "../../commons/img/logo.png";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Start = () => {
+    const [mailaddress, setMailaddress] = useState('');
+    const [password, setPassword] = useState('');
+    const [data , setData] = useState([]);
     const navigate = useNavigate();
-    const handleLogin = () => {
-        navigate('/Main');
-    }
-    const handleRegister = () => {
-        navigate('/Register');
-    }
+    useEffect(() => {
+        fetch('http://localhost:8080/User/Get').then(res => {
+            res.json().then(value => {
+                setData(value);
+                console.log(value);
+            }) 
+        })
+        .catch(err => {
+            console.error(err);
+    });},[]);
+
+
+        const handleLogin = () => {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].mailaddress === mailaddress && data[i].password === password) {
+                    navigate('/Main?name=' + data[i].name);
+                }
+            }
+        }
+        const handleRegister = () => {
+            navigate('/Register');
+        }
+
     return (
         <div className='start-container'>
             <section className='start-left'>
                 <div className='start-header'>
-                    <h1>Cloth Up!</h1>
+                    <h1><span className='logospan'>C</span>loth <span className='logospan'>U</span>p!</h1>
                     <img src={img} alt="Cloth Up logo" />
                     <p>Hello!</p>
                 </div>
@@ -25,11 +46,11 @@ const Start = () => {
                         <form>
                             <label>
                                 メールアドレス
-                                <input type="email" />
+                                <input type="email" onChange={(e) => setMailaddress(e.target.value)}/>
                             </label>
                             <label>
                                 パスワード
-                                <input type="password" />
+                                <input type="password" onChange={(e) => setPassword(e.target.value)}/>
                             </label>
                         </form>
                         <div className='login-buttons'>

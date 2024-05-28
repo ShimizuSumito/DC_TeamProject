@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
 import img from "../../../commons/img/girl.jpg";
 export default function Register() {
     const navigate = useNavigate();
-    const toCheck = () => {
+    const [name, setName] = useState('');
+    const [nickname,setNickname] =useState('');
+    const [mailaddress, setMailaddress] = useState('');
+    const [password, setPassword] = useState('');
+    const [gender, setGender] = useState('');
+    const [generation, setGeneration] = useState('');
+    const [region, setRegion] = useState('');
+    // const [userData, setUserData] = useState([]);
 
-        navigate('/Check');
+    
+    const toCheck = () => {
+        const userData = {
+            name, 
+            mailaddress,
+            gender, 
+            generation,
+            password,  
+            nickname,
+            region
+        }
+        console.log(userData);
+        navigate('/Check', {
+            state: userData
+        });
     }
     return (
         <div className='start-container register'>
@@ -20,34 +41,38 @@ export default function Register() {
                 <form className='register-form'>
                     <label className='nes'>
                         お名前(アカウント名)
-                        <input type="text" />
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+                    </label>
+                    <label className='nes'>
+                        ニックネーム
+                        <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)}/>
                     </label>
                     <label className='nes'>
                         メールアドレス(ログインID)
-                        <input type="email" />
+                        <input type="email" value={mailaddress} onChange={(e) => setMailaddress(e.target.value)}/>
                     </label>
                     <label className='nes'>
                         パスワード
-                        <input type="password" />
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </label>
                     <label>性別</label>
                     <div class="radio-group">
                         <label>
-                            <input type="radio" name="option" value="1"/>
+                            <input type="radio" name="option" value="男性" checked={gender === "男性"} onChange={(e) => setGender("男性")}/>
                             男性
                         </label>
                         <label>
-                            <input type="radio" name="option" value="2"/>
+                            <input type="radio" name="option" value="女性" checked={gender === "女性"} onChange={(e) => setGender("女性")}/>
                             女性
                         </label>
                         <label>
-                            <input type="radio" name="option" value="3"/>
+                            <input type="radio" name="option" value="その他" checked={gender === "その他"} onChange={(e) => setGender("その他")}/>
                             その他
                         </label>
                     </div>
-                    <label className='select'>
+                    <label className='age'>
                         年代<br />   
-                        <select className='short-select'>
+                        <select className='short-select' value={generation} onChange={(e) => setGeneration(e.target.value)}>
                             <option value="10代">10代</option>
                             <option value="20代">20代</option>
                             <option value="30代">30代</option>
@@ -61,7 +86,7 @@ export default function Register() {
                     </label>
                     <label>
                         地域<br />
-                        <select className='short-select'>
+                        <select className='short-select' value={region} onChange={(e) => setRegion(e.target.value)}>
                             <option value="札幌">札幌</option>
                             <option value="仙台">仙台</option>
                             <option value="東京">東京</option>

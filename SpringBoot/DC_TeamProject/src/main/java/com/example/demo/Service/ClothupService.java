@@ -14,6 +14,8 @@ import com.example.demo.Repositories.ClothupClothesRepository;
 import com.example.demo.Repositories.ClothupTimelineRepository;
 import com.example.demo.Repositories.ClothupUserDatabaseRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ClothupService {
 	@Autowired
@@ -26,11 +28,16 @@ public class ClothupService {
 		// TODO 自動生成されたメソッド・スタブ
 		return userDatabaseRepository.findAll();
 	}
+	
+	@Transactional
 	public boolean AddUser(UserDatabase newUser) {
 		// TODO 自動生成されたメソッド・スタブ
 		try 
 		{
+			System.out.println("AddUser");
+			System.out.println(newUser.mailaddress);
 			userDatabaseRepository.saveAndFlush(newUser);
+			System.out.println("AddUser");
 			return true;
 		}
 		catch(Exception e)
@@ -169,19 +176,5 @@ public class ClothupService {
 	public List<Timeline> FindIdTimeline(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return timelineRepository.findById(id);
-	}
-	public UserDatabase findByAddressAndPassword(String address, String password) {
-		// TODO 自動生成されたメソッド・スタブ
-		return userDatabaseRepository.findByMailaddressAndPassword(address, password);
-	}
-	public List<Clothes> SearchCloths(int temperature, String location, String situation) {
-		// TODO 自動生成されたメソッド・スタブ
-		List<Clothes> list = clothesRepository.findByMinTemperatureLessThanEqualAndMaxTemperatureGreaterThanEqual(temperature, temperature);
-		List<Clothes> ret = null;
-		for (Clothes c : list)
-		{
-			if ((c.location == location) && (c.situation == situation)) ret.add(c);
-		}
-		return ret;
 	}
 }

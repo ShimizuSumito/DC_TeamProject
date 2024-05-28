@@ -25,12 +25,12 @@
 .register input {
     text-align: left;
 }
-.register select{
+.register age{
     width: 60%;
     height: 30px;
 }
 
-select{
+age{
     width: 30%;
     height: 30px;
     margin-bottom: 10px;
@@ -69,6 +69,7 @@ font-size: 16px;
     cursor: pointer;
     width: 30%;
     margin: auto;
+    border-radius: 4px;
 
 }
 .form-area{

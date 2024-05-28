@@ -1,0 +1,105 @@
+.ClothRegister {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+.container {
+    display: inline-block;
+    text-align: left;
+    background-color: #ffffff;
+    padding: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section div {
+    margin: 5px 0;
+}
+
+.ClothRegister button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+button.active {
+    background-color: #e0f7fa;
+    border-color: #00bcd4;
+}
+
+.action-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #00bcd4;
+    color: #ffffff;
+}
+
+.action-button:hover {
+    background-color: #0097a7;
+}
+
+select {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.temperature {
+    display: flex;
+    align-items: center;
+}
+
+.temperature input {
+    width: 60px;
+    padding: 5px;
+    margin: 0 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.temp-form {
+    display: flex;
+    width: 150px;
+}
+
+.temp-form input {
+    padding: 5px;
+    width: 100%;
+}
+
+.ChooseSubmit {
+    display: flex;
+    justify-content: center;
+
+}
+
+.OrangeButton {
+    background-color: #FFA500 !important;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+}
+
+.border-none{
+    border: none;
+}

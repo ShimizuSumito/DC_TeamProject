@@ -1,3 +1,105 @@
-h1{
-    color: black;
+/* Timeline.css */
+.mySwiper {
+    width: 100%;
+    height: 100%;
+    padding: 50px 0;
+}
+
+.each-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #F09D71;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-city {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.timeline-situation {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+}
+
+.timeline-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Swiper custom styles */
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-pagination-bullet {
+    background: #007aff;
+}
+
+.swiper-pagination-bullet-active {
+    background: #005bb5;
+}
+
+.tag{
+    margin: 20px;
+    margin-left: 0px;
+    margin-right: auto;
+}
+.tag span{
+    width: 100%;
+    height: 20px;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+
+}
+
+.city-name{
+    font-size: 32px;
+    font-weight: bolder;
+    color: #F09D71;
 }

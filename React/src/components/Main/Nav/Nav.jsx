@@ -23,13 +23,13 @@ const Nav = () => {
             <nav>    
                 <ul>
                     <li>
-                        <Link className='Home' to="/Main" style={{ textDecoration: 'none',color:'white' }}>Home</Link>
+                        <Link className='Home' to="/Main" style={{ textDecoration: 'none',color:'white' }}>ホーム</Link>
                     </li>
                     <li>
-                        <Link className='Timeline' to="/Main/timeline" style={{ textDecoration: 'none',color:'white' }}>Timeline</Link>
+                        <Link className='Timeline' to="/Main/timeline" style={{ textDecoration: 'none',color:'white' }}>タイムライン</Link>
                     </li>
                     <li>
-                        <Link className='Weather' to="/Main/Weather" style={{ textDecoration: 'none',color:'white' }}>Weather</Link>
+                        <Link className='Weather' to="/Main/Weather" style={{ textDecoration: 'none',color:'white' }}>お天気</Link>
                     </li>
                 </ul>
             </nav>

@@ -11,6 +11,4 @@ public interface ClothupClothesRepository extends JpaRepository<Clothes,Integer>
 	List<Clothes> findByMailaddress(String email);
 
 	public ClothesInterface findById(int id);
-
-	List<Clothes> findByMinTemperatureLessThanEqualAndMaxTemperatureGreaterThanEqual(int temperature, int temperature2);
 }

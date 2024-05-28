@@ -3,30 +3,30 @@ package com.example.demo.Interface;
 public interface UserDatabaseInterface {
     public String getMailaddress();
     
-    public void setMailaddress(String mailAddress);
+    public void setMailaddress(String mailaddress);
     
-    public String getName();
+    public String GetName();
     
-    public void setName(String name);
+    public void SetName(String name);
     
-    public String getGender();
+    public String GetGender();
     
-    public void setGender(String gender);
+    public void SetGender(String gender);
     
-    public String getGeneration();
+    public String GetGeneratuion();
     
-    public void setGeneration(String generation);
+    public void SetGeneration(String generation);
     
-    public String getPassword();
+    public String GetPassword();
     
-    public void setPassword(String password);
+    public void SetPassword(String password);
     
-    public String getNickname();
+    public String GetNickname();
     
-    public void setNickname(String nickname);
+    public void SetNickname(String nickname);
     
-    public String getRegion();
+    public String GetRegion();
     
-    public void setRegion(String region);
+    public void SetRegion(String region);
 
 }

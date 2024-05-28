@@ -1,3 +1,30 @@
-h1{
-    color: black;
+
+    .home-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        margin: 0 auto;
+
+    }
+
+    .home-container button {
+        background-color: #F09D71;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+.toMyclothes{
+    margin: 30px;
+}
+.toMyclothes :hover{
+    border-bottom:solid 3px #F09D71;
 }
