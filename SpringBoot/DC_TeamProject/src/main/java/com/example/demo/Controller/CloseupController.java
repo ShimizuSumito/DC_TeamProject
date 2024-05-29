@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Data.Clothes;
-import com.example.demo.Data.LoginData;
 import com.example.demo.Data.Timeline;
 import com.example.demo.Data.UserDatabase;
 import com.example.demo.Interface.ClothesInterface;
@@ -33,7 +32,7 @@ public class CloseupController {
 	
 	@GetMapping("/User/Find/{mailaddress}")
 	@CrossOrigin
-	public UserDatabaseInterface FindUser(@PathVariable String mailaddress)
+	public UserDatabase FindUser(@PathVariable String mailaddress)
 	{
 		return service.FindUser(mailaddress);
 	}
@@ -50,6 +49,13 @@ public class CloseupController {
 	public boolean DeleteUser(@RequestBody UserDatabase deleteUser)
 	{
 		return service.DeleteUser(deleteUser);
+	}
+	
+	@PostMapping("/User/Delete/{mailaddress}")
+	@CrossOrigin
+	public void DeleteUser(@PathVariable String mailaddress)
+	{
+		service.DeleteUser(mailaddress);
 	}
 	
 	@PostMapping("/User/Update")
@@ -84,6 +90,7 @@ public class CloseupController {
 	@CrossOrigin
 	public boolean AddClothes(@RequestBody Clothes addClothes)
 	{
+		System.out.println("登録");
 		return service.AddClothes(addClothes);
 	}
 	
@@ -92,6 +99,13 @@ public class CloseupController {
 	public boolean DeleteClothes(@RequestBody Clothes deleteClothes)
 	{
 		return service.DeleteClothes(deleteClothes);
+	}
+	
+	@PostMapping("/Clothes/Delete/{id}")
+	@CrossOrigin
+	public boolean DeleteClothes(@PathVariable int id)
+	{
+		return service.DeleteClothes(id);
 	}
 	
 	@PostMapping("/Clothes/Update")
@@ -150,18 +164,17 @@ public class CloseupController {
 		return service.UpdateTimeline(updateTimeline);
 	}
 
-	@PostMapping("/Login")
+	@PostMapping("/User/Login/{mailaddress}/{password}")
 	@CrossOrigin
-	public ResponseEntity<UserDatabase> findByUsernameAndPassword(@RequestBody LoginData loginData) {
-	    String address = loginData.getAddress();
-	    String password = loginData.getPassword();
-	    System.out.println("Service: findByUsernameAndPassword [username=" + address + ", password=" + password + "]");
-	    UserDatabase users = service.findByAddressAndPassword(address, password);
+	public ResponseEntity<UserDatabase> findByUsernameAndPassword(@PathVariable String mailaddress, @PathVariable String password) {
+	    UserDatabase users = service.findByAddressAndPassword(mailaddress, password);
 	    
 	    if(users == null) {
+	    	System.out.println("ログイン失敗");
 	        // ���[�U�[��������Ȃ��ꍇ��404�G���[���X�|���X��Ԃ�
 	        return ResponseEntity.notFound().build();
 	    } else {
+	    	System.out.println("ログイン処理完了");
 	        // ���[�U�[�����������ꍇ�ɂ͂��̏���Ԃ�
 	        return ResponseEntity.ok(users);
 	    }

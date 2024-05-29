@@ -72,7 +72,7 @@ public class ClothupService {
 			return false;
 		}
 	}
-	public UserDatabaseInterface FindUser(String mailaddress) {
+	public UserDatabase FindUser(String mailaddress) {
 		// TODO 自動生成されたメソッド・スタブ
 		return userDatabaseRepository.findByMailaddress(mailaddress);
 	}
@@ -176,5 +176,36 @@ public class ClothupService {
 	public List<Timeline> FindIdTimeline(int id) {
 		// TODO 自動生成されたメソッド・スタブ
 		return timelineRepository.findById(id);
+	}
+
+	public UserDatabase findByAddressAndPassword(String address, String password) {
+		// TODO 自動生成されたメソッド・スタブ
+		return userDatabaseRepository.findByMailaddressAndPassword(address, password);
+	}
+
+	public List<Clothes> SearchCloths(int temperature, String location, String situation) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public void DeleteUser(String mailaddress) {
+		// TODO 自動生成されたメソッド・スタブ
+		UserDatabase user = userDatabaseRepository.findByMailaddress(mailaddress);
+		userDatabaseRepository.delete(user);
+		
+	}
+	public boolean DeleteClothes(int id) {
+		// TODO 自動生成されたメソッド・スタブ
+		try
+		{
+			Clothes clothes = clothesRepository.findById(id);
+			clothesRepository.delete(clothes);
+			return true;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			return false;
+		}
 	}
 }
