@@ -20,6 +20,10 @@
     max-width: 800px;
     text-align: center;
     margin-top: 20px;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 rgb(36, 36, 36);
+    font-weight: bold;
+
 }
 
 .weather-button {
@@ -48,6 +52,11 @@
 
 .weather-section.active {
     display: block;
+    background-image: url(../../../commons/img/Notweather1.png);
+    background-position: center; 
+    height: auto;
+    width: 100%;
+    background-repeat: no-repeat;
 }
 
 .top-text {
@@ -73,18 +82,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ecf0f1;
+    background-color: #508fa47f;
     padding: 10px;
     border-radius: 10px;
-    width: 60px;
+    width: 100px;
     margin: 5px;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.day:hover {
-    transform: translateY(-5px);
-    background-color: #bdc3c7;
-}
 
 .day img {
     width: 40px;

@@ -59,17 +59,17 @@ const Weather = () => {
                     let newBackground = '';
     
                     switch (weather) {
-                        case 'Clear':
+                        case weather.includes('clear'):
                             newBackground = 'clear.png';
                             break;
-                        case 'Clouds':
-                            newBackground = 'cloudy.jpg';
+                        case weather.includes('clouds'):
+                            newBackground = 'cloud.png';
                             break;
-                        case 'Rain':
+                        case weather.includes('rain'):
                             newBackground = 'rainy.png';
                             break;
                         default:
-                            newBackground = 'default.jpg';
+                            newBackground = 'Notweather1.png';
                     }
     
                     newBackgrounds[city.en] = newBackground;
