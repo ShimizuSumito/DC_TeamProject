@@ -29,28 +29,41 @@ export default function ClothRegister() {
     setPhoto(event.target.files[0]); // 選択されたファイルをphoto状態に設定
   };
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const handleSubmit = async () => {
     navigate("/Main");  // フォーム送信時の処理
     console.log('form Data:', formData); // フォームデータをコンソールに出力
 
-    const dataToSend = new FormData(); // FormDataオブジェクトを作成
-    dataToSend.append('color', selectedButtons.color); // 選択されたカラーを追加
-    dataToSend.append('location', selectedButtons.location); // 選択された行先を追加
-    dataToSend.append('situation', selectedButtons.situation); // 選択されたシチュエーションを追加
-    dataToSend.append('temprature', selectedButtons.temprature); // 選択された気温を追加
-
-    if (photo) { // 写真が選択されている場合
-      dataToSend.append('photo', photo); // 写真を追加
+    let photoBase64 = null;
+    if (photo) {
+      photoBase64 = await convertToBase64(photo);
     }
 
-    for (let [key, value] of dataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    const dataToSend = {
+      color: selectedButtons.color,
+      location: selectedButtons.location,
+      situation: selectedButtons.situation,
+      temprature: selectedButtons.temprature,
+      photo: photoBase64,
+    };
+
+    console.log('Data to send:', dataToSend);
 
     try {
       const response = await fetch('https://example.com/api/cloth-register', { // Fetch APIを使用してデータを送信
         method: 'POST', // HTTPメソッドをPOSTに設定
-        body: dataToSend, // 送信するデータ
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend), // 送信するデータ
       });
 
       if (!response.ok) { // レスポンスが正常でない場合
