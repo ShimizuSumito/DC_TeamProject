@@ -18,6 +18,8 @@ const CITIES = [
 const Weather = () => {
     const [weatherData, setWeatherData] = useState({});
     const [refreshing, setRefreshing] = useState(false);
+    // 森嵜が追加
+    const [background, setBackgrounds] = useState('');
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -47,6 +49,40 @@ const Weather = () => {
         fetchWeatherData();
     }, [refreshing]);
 
+    // 森嵜が追加
+    useEffect(() => {
+        if (weatherData) {
+            const newBackgrounds = {};
+            CITIES.forEach(city => {
+                if (weatherData[city.en]) {
+                    const weather = weatherData[city.en].list[0].weather[0].main;
+                    let newBackground = '';
+    
+                    switch (weather) {
+                        case 'Clear':
+                            newBackground = 'clear.png';
+                            break;
+                        case 'Clouds':
+                            newBackground = 'cloudy.jpg';
+                            break;
+                        case 'Rain':
+                            newBackground = 'rainy.png';
+                            break;
+                        default:
+                            newBackground = 'default.jpg';
+                    }
+    
+                    newBackgrounds[city.en] = newBackground;
+                }
+            });
+            setBackgrounds(newBackgrounds);
+        }
+    }, [weatherData]);
+// ここまで    
+
+
+
+
     const getUniqueForecastData = (data) => {
         if (!data) return [];
         const uniqueForecastData = [];
@@ -62,7 +98,8 @@ const Weather = () => {
     };
 
     return (
-        <div className="weather-page">
+        <div className="weather-page" style={{ backgroundImage: `url(${background})` }}>
+             {/* 森嵜が追加style={{ backgroundImage: `url(${background})` }} */}
             <div className="weather_container">
                 <button className="weather-button" onClick={() => setRefreshing(true)}>更新</button>
                 {CITIES.map(city => (
