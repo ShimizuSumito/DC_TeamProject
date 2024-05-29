@@ -84,7 +84,6 @@ export default function Timeline() {
                   <div className="timeline-item" key={index}>
                     <img src={item.img} alt="sampleImg" />
                     <div className="tag">
-                        <span>場所：{item.city}</span>
                         <span>シチュエーション：{item.situation}</span>
                     </div>
                     <div className="timeline-content">{item.content}</div>

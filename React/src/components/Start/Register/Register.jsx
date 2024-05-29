@@ -9,8 +9,8 @@ export default function Register() {
     const [mailaddress, setMailaddress] = useState('');
     const [password, setPassword] = useState('');
     const [gender, setGender] = useState('');
-    const [generation, setGeneration] = useState('');
-    const [region, setRegion] = useState('');
+    const [generation, setGeneration] = useState('10代');
+    const [region, setRegion] = useState('札幌');
     // const [userData, setUserData] = useState([]);
 
     

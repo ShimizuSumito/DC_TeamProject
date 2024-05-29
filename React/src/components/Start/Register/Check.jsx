@@ -34,13 +34,13 @@ export default function Check() {
                 headers: {
                     'Content-Type':'application/json'
                 },
-                body: JSON.stringify(newStock.nameaddress),
+                body: JSON.stringify(newStock),
             });
 
             console.log(newStock);
             
             if (response.ok) {
-                navigate('/RegisterSuccess');
+                navigate('/RegisterSuccess', {state: newStock.nickname});
             } else if (response.status === 409) {
                 const errorMessage = await response.text();
                 alert(errorMessage);
