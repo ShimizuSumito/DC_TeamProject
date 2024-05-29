@@ -9,10 +9,6 @@ public interface ClothesInterface {
     
     public void SetLocation(String location);
     
-    public String GetTemperature_range();
-    
-    public void SetTemperature_range(String temperature_range);
-    
     public String GetSituation();
     
     public void SetSituatuion(String situation);
@@ -32,4 +28,12 @@ public interface ClothesInterface {
     public String GetMailaddress();
     
     public void SetMailaddress(String mailaddress);
+    
+    public int GetMinTemperature();
+    
+    public void SetMinTemperature(int minTemperature);
+    
+    public int GetMaxTemperature();
+    
+    public void SetMaxTemperature(int maxTemperature);
 }

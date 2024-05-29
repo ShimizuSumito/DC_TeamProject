@@ -19,8 +19,6 @@ public class Clothes implements ClothesInterface{
 	public int id;
     @Column
     public String location;
-    @Column
-    public String temperature_range;
     @Column 
     public String situation;
     @Column
@@ -32,6 +30,10 @@ public class Clothes implements ClothesInterface{
     public byte[] image;
     @Column
     public String mailaddress;
+    @Column
+    public int minTemperature;
+    @Column
+    public int maxTemperature;
     
     public int GetId()
     {
@@ -51,16 +53,6 @@ public class Clothes implements ClothesInterface{
     public void SetLocation(String location)
     {
     	this.location = location;
-    }
-    
-    public String GetTemperature_range()
-    {
-    	return temperature_range;
-    }
-    
-    public void SetTemperature_range(String temperature_range)
-    {
-    	this.temperature_range = temperature_range;
     }
     
     public String GetSituation()
@@ -111,5 +103,25 @@ public class Clothes implements ClothesInterface{
     public void SetMailaddress(String mailaddress)
     {
     	this.mailaddress = mailaddress;
+    }
+    
+    public int GetMinTemperature()
+    {
+    	return minTemperature;
+    }
+    
+    public void SetMinTemperature(int minTemperature)
+    {
+    	this.minTemperature = minTemperature;
+    }
+    
+    public int GetMaxTemperature()
+    {
+    	return maxTemperature;
+    }
+    
+    public void SetMaxTemperature(int maxTemperature)
+    {
+    	this.maxTemperature = maxTemperature;
     }
 }
