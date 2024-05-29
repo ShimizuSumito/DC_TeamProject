@@ -1,13 +1,13 @@
-
-
 nav ul {
     background-color: #F09D71;
     height: 50px;
     list-style-type: none;
-    height:50px;
-    display: flex; /* 横並びにするために Flexbox を使用 */
+    height: 50px;
+    display: flex;
+    /* 横並びにするために Flexbox を使用 */
     align-items: center;
-    justify-content: center; /* リスト項目を均等に分配 */
+    justify-content: center;
+    /* リスト項目を均等に分配 */
     font-size: 20px;
     gap: 10%;
 }
@@ -15,8 +15,26 @@ nav ul {
 nav ul li {
     color: white;
     text-decoration: none;
+    display: inline-block;
 }
-.nav{
+
+nav li::after {
+    content: "";
+    display: block;
+    width: 0;
+    transition: width 0.3s;
+    /* border or (height & background) etc. */
+    border-bottom: 2px solid #FFFFFF;
+    border-radius: 5px;
+    /* margin: 0 auto; */
+    /* left to right -> middle out */
+}
+
+li:hover::after {
+    width: 100%;
+}
+
+.nav {
     position: relative;
 }
 
@@ -28,13 +46,15 @@ nav ul li {
     top: 10px;
     z-index: 10;
 }
+
 .line {
     width: 30px;
     height: 3px;
     background-color: white;
     margin: 5px;
 }
-.sidebar{
+
+.sidebar {
     position: fixed;
     top: 0;
     width: 200px;
@@ -46,7 +66,8 @@ nav ul li {
     transition: 0.5s;
     z-index: 2;
 }
-.bg{
+
+.bg {
     position: fixed;
     top: 0;
     width: 100%;
@@ -57,6 +78,7 @@ nav ul li {
     z-index: 1;
 
 }
+
 .sidebar ul {
     list-style-type: none;
     padding: 0;
