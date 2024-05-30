@@ -44,7 +44,7 @@ export default function Recommend() {
                     if (chooseData.situation && (!cloth.situation || !cloth.situation.includes(chooseData.situation))) {
                         matches = false;
                     }
-                    if (chooseData.temprature && (!cloth.temprature || !cloth.temprature.includes(chooseData.temprature))) {
+                    if (chooseData.temprature && (!cloth.temepratureRange || !cloth.temperatureRange.includes(chooseData.temprature))) {
                         matches = false;
                     }
 
