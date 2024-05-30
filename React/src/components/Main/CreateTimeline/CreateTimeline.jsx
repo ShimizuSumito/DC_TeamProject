@@ -1,5 +1,6 @@
 import './CreateTimeline.css';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 export default function CreateTimeline() {
     const navigate = useNavigate();
     const toHome = () => {
@@ -9,7 +10,11 @@ export default function CreateTimeline() {
         navigate("/Main/Timeline");
     }
     return (
-        <div className="create-timeline">
+        <motion.div className="create-timeline"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.5}}
+        >
         <h1>タイムライン作成画面</h1>
         <div className="create-timeline-container">
             <form action="">
@@ -45,6 +50,6 @@ export default function CreateTimeline() {
                 <button onClick={toHome}>ホームに戻る</button>
                 <button onClick={toTimeline}>投稿する</button>
             </div>
-    </div>
+    </motion.div>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import img from "../../../commons/img/girl.jpg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 export default function Check() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -65,7 +66,11 @@ export default function Check() {
                     <p>Let's get you set up!</p>
                 </div>
             </section>
-            <section className='start-right'>
+            <motion.section className='start-right'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.4}}
+            >
                 <form className='register-form' onSubmit={handleSubmit}>
                     <label className='nes'>
                         お名前(アカウント名)
@@ -99,7 +104,7 @@ export default function Check() {
                     <button className='tocheck-button' type="submit">完了</button>
                     </div>
                 </form>
-            </section>
+            </motion.section>
         </div>
     );   
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
 import img from "../../../commons/img/girl.jpg";
+    import { motion } from 'framer-motion';
 export default function Register() {
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -30,7 +31,11 @@ export default function Register() {
         });
     }
     return (
-        <div className='start-container register'>
+        <motion.div className='start-container register'
+        initial={{ x: '200vw' }}
+        animate={{ x: 0 }}
+        transition={{ type: 'spring', stiffness: 50 }}
+        >
             <section className='start-left'>
                 <div className='start-header'>
                     <img src={img} alt="Cloth Up logo" />
@@ -101,6 +106,6 @@ export default function Register() {
                     <button className='tocheck-button' onClick={toCheck}>確認場面へ</button>
                 </form>
             </section>
-        </div>
+        </motion.div>
     )
 }
