@@ -6,6 +6,8 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import sampleImg from '././../../../commons/img/notclothes.png';
+import { motion } from "framer-motion";
+
 
 // import required modules
 import { EffectCoverflow, Pagination } from 'swiper/modules';
@@ -57,7 +59,11 @@ export default function Timeline() {
   }, []);
 
   return (
-    <>
+    <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.5}}
+    >
       <Swiper
         effect={'coverflow'}
         grabCursor={true}
@@ -94,6 +100,6 @@ export default function Timeline() {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </motion.div>
   );
 }

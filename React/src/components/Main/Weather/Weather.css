@@ -102,3 +102,8 @@
     color: #7f8c8d;
     margin-top: 5px;
 }
+.weather-section {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:left;
+}

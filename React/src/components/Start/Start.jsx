@@ -3,6 +3,7 @@ import './Start.css';
 import img from '../../commons/img/logo.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
+import { motion } from 'framer-motion';
 
 const Start = () => {
     const location = useLocation();
@@ -52,7 +53,11 @@ const Start = () => {
     };
 
     return (
-        <div className='start-container'>
+        <motion.div className='start-container'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.4}}
+        >
             <section className='start-left'>
                 <div className='start-header'>
                     <h1><span className='logospan'>C</span>loth <span className='logospan'>U</span>p!</h1>
@@ -88,7 +93,7 @@ const Start = () => {
                     <p>④みんなの今日の服装チェック</p>
                 </section>
             </section>
-        </div>
+        </motion.div>
     );
 };
 

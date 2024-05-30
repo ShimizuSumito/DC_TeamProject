@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Weather.css';
+import { motion } from 'framer-motion';
+import clear from '../../../commons/img/clear.png';
+import cloud from '../../../commons/img/cloud.png';
+import rainy from '../../../commons/img/rainy.png';
 
 const API_KEY = 'da3338eba5bfe0177fb5cb76ddaa3717';
 const NUM_DAYS = 5;
@@ -18,8 +22,8 @@ const CITIES = [
 const Weather = () => {
     const [weatherData, setWeatherData] = useState({});
     const [refreshing, setRefreshing] = useState(false);
-    // 森嵜が追加
-    const [background, setBackgrounds] = useState('');
+    // 背景画像の状態を追加
+    const [backgrounds, setBackgrounds] = useState({});
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -49,39 +53,30 @@ const Weather = () => {
         fetchWeatherData();
     }, [refreshing]);
 
-    // 森嵜が追加
     useEffect(() => {
         if (weatherData) {
             const newBackgrounds = {};
             CITIES.forEach(city => {
                 if (weatherData[city.en]) {
-                    const weather = weatherData[city.en].list[0].weather[0].main;
+                    const weather = weatherData[city.en].list[0].weather[0].main.toLowerCase();
                     let newBackground = '';
-    
-                    switch (weather) {
-                        case weather.includes('clear'):
-                            newBackground = 'clear.png';
-                            break;
-                        case weather.includes('clouds'):
-                            newBackground = 'cloud.png';
-                            break;
-                        case weather.includes('rain'):
-                            newBackground = 'rainy.png';
-                            break;
-                        default:
-                            newBackground = 'Notweather1.png';
+
+                    if (weather.includes('clear')) {
+                        newBackground = clear;
+                    } else if (weather.includes('clouds')) {
+                        newBackground = cloud;
+                    } else if (weather.includes('rain')) {
+                        newBackground = rainy;
+                    } else {
+                        newBackground = ''; // デフォルトの背景画像がある場合はここで設定
                     }
-    
+
                     newBackgrounds[city.en] = newBackground;
                 }
             });
             setBackgrounds(newBackgrounds);
         }
     }, [weatherData]);
-// ここまで    
-
-
-
 
     const getUniqueForecastData = (data) => {
         if (!data) return [];
@@ -98,19 +93,22 @@ const Weather = () => {
     };
 
     return (
-        <div className="weather-page" style={{ backgroundImage: `url(${background})` }}>
-             {/* 森嵜が追加style={{ backgroundImage: `url(${background})` }} */}
+        <motion.div className="weather-page"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+        >
             <div className="weather_container">
                 <button className="weather-button" onClick={() => setRefreshing(true)}>更新</button>
                 {CITIES.map(city => (
-                    <section key={city.en} className="weather-section active">
+                    <section key={city.en} className="weather-section" style={{ backgroundImage: `url(${backgrounds[city.en]})` }}>
                         <p className="top-text">{city.jp}のお天気</p>
                         <div className="weather_content">
                             {weatherData[city.en] && (
                                 <>
                                     <p>現在のお天気</p>
                                     <p>{weatherData[city.en].list[0].weather[0].description}</p>
-                                    <img src={`http://openweathermap.org/img/wn/${weatherData[city.en].list[0].weather[0].icon}.png`} alt="weather icon" />
+
                                     <p>{city.jp}: {weatherData[city.en].list[0].main.temp}°</p>
                                     <date>{new Date().toLocaleDateString()}</date>
                                     <div className="weather_week">
@@ -128,7 +126,7 @@ const Weather = () => {
                     </section>
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 };
 

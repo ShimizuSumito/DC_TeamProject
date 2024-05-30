@@ -4,6 +4,7 @@ import { useState, useContext } from 'react';
 import '../../Start/Register/Register.css';
 import './Mypage.css';
 import { UserContext } from '../../../App';
+import { motion } from 'framer-motion';
 
 export default function Mypage() {
     const { userinfo, setUserinfo } = useContext(UserContext);
@@ -52,7 +53,11 @@ export default function Mypage() {
     };
 
     return (
-        <div className='start-container register mypage'>
+        <motion.div className='start-container register mypage'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.5}}
+        >
             <section className='start-right'>
                 <form className='register-form' onSubmit={toDatabase}>
                     <label className='nes'>
@@ -100,6 +105,6 @@ export default function Mypage() {
                     <button className='tocheck-button' type='submit'>確認場面へ</button>
                 </form>
             </section>
-        </div>
+        </motion.div>
     );
 }

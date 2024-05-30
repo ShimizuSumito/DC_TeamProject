@@ -1,5 +1,6 @@
 import'./Recommend.css';
 import {useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 export default function Recommend() {
     const navigate = useNavigate();
     const toHome = () => {
@@ -9,7 +10,11 @@ export default function Recommend() {
         navigate("/Main/CreateTimeline");
     }
     return (
-        <div  className='recommend'>
+        <motion.div  className='recommend'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.5}}
+        >
             <h1>あなたへのおすすめ</h1>
             <div className="recommend-container">
                 <div className="item">
@@ -57,6 +62,6 @@ export default function Recommend() {
                 <button onClick={toHome}>ホームへ戻る</button>
                 <button onClick={toCreateTimeline}>写真を投稿する</button>
             </div>
-        </div>
+        </motion.div>
     )
 }

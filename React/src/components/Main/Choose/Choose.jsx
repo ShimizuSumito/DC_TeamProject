@@ -2,6 +2,7 @@ import React from 'react';
 import './Choose.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Choose() {
   const Navigate = useNavigate();
@@ -24,7 +25,9 @@ export default function Choose() {
 
     setSelectedButtons({ ...selectedButtons, [category]: value });
   };
-
+  const toHome=()=>{
+    Navigate("/Main");
+  }
   const handleSubmit = async () => {
     console.log('form Data:', formData);
     Navigate("/Main/Recommend");
@@ -55,7 +58,11 @@ export default function Choose() {
   };
 
   return (
-    <div className="Choose">
+    <motion.div className="Choose"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6,delay: 0.5}}
+    >
       <h2>服を選ぶ！</h2>
       <div className="container">
         <div className="section">
@@ -133,15 +140,19 @@ export default function Choose() {
         </div>
         <h3>この情報で検索します</h3>
         <div className='ChooseSubmit'>
-          <button onClick={() => setFormData({
+          <button onClick={() => {
+            setFormData({
             color: '',
             location: '',
             situation: '',
             temprature: ''
-          })}>戻る</button>
+            });
+            toHome()
+           }}
+           >戻る</button>
           <button onClick={handleSubmit} className='OrangeButton'>検索する</button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
