@@ -26,7 +26,7 @@ export default function ClothRegister() {
   useEffect(() => {
     const fetchImageData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/Clothes/Find/9');
+        const response = await axios.get('http://localhost:8080/Clothes/Find/13');
         setPhoto(response.data.image);
       } catch (error) {
         console.error('Error fetching image data:', error);
@@ -50,14 +50,6 @@ export default function ClothRegister() {
     const file = event.target.files[0];
     setImageData(file);
     console.log(imageData);
-    // const reader = new FileReader();
-
-    // reader.onload = function(event) {
-    //   const base64Data = event.target.result.split(',')[1]; // プレフィックスを除外して実際のBase64データを取得
-    //   setImageData(base64Data); // Base64エンコードされたデータを保存
-    // };
-
-    // reader.readAsDataURL(file);
   };
   
   const handleSubmit = async () => {

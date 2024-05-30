@@ -1,10 +1,16 @@
 package com.example.demo.Controller;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.util.Base64;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +35,7 @@ import com.example.demo.Service.ClothupService;
 
 @RestController
 public class CloseupController {
+	private static final List<? extends UserDatabaseInterface> Thumbnails = null;
 	@Autowired
 	private ClothupService service;
 	
@@ -105,10 +112,34 @@ public class CloseupController {
             @RequestParam(name="category") String category,
             @RequestPart(name="image") MultipartFile  base64Image, // Base64エンコードされた画像データを受け取る
             @RequestParam(name="mailaddress") String mailaddress) throws IOException{
-        try {
+			byte[] resizedImageBytes;
+			try {
             // Base64デコード
             //byte[] imageBytes = Base64.getDecoder().decode(base64Image);
-        	byte[] imageData = base64Image.getBytes();
+            // 元の画像を指定されたサイズに縦横比を保持しつつリサイズ
+        	// MultipartFileからバイト配列を取得
+        	byte[] imageBytes = base64Image.getBytes();
+
+        	// バイト配列をByteArrayInputStreamにラップしてBufferedImageとして扱う
+        	try (ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes)) {
+        	    BufferedImage originalImage = ImageIO.read(inputStream);
+      	        // リサイズ後のサイズ
+        	    int resizedWidth = 200; // リサイズ後の幅
+        	    int resizedHeight = 300; // リサイズ後の高さ
+
+        	    // リサイズ処理
+        	    BufferedImage resizedImage = new BufferedImage(resizedWidth, resizedHeight, BufferedImage.TYPE_INT_RGB);
+        	    Graphics2D g2d = resizedImage.createGraphics();
+        	    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        	    g2d.drawImage(originalImage, 0, 0, resizedWidth, resizedHeight, null);
+        	    g2d.dispose();
+
+        	    // BufferedImageをバイト配列に変換してBLOBとして保存するためのデータとして使用する
+        	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        	    ImageIO.write(resizedImage, "jpg", baos);
+        	    resizedImageBytes = baos.toByteArray();
+        	}        	
+        	byte[] imageData = service.resizeAndConvertToByteArray(base64Image);
         	Blob imageBlob = new SerialBlob(imageData);
             Clothes addClothes = new Clothes();
             addClothes.setLocation(location);
@@ -117,7 +148,7 @@ public class CloseupController {
             addClothes.setColor(color);
             addClothes.setCategory(category);
             // addClothes.setImage(imageBytes);
-            addClothes.setImage(imageData);
+            addClothes.setImage(resizedImageBytes);
             addClothes.setMailaddress(mailaddress);
             service.AddClothes(addClothes);
             System.out.println(addClothes.getImage().length);
@@ -185,6 +216,7 @@ public class CloseupController {
 	@CrossOrigin
 	public List<Timeline> FindLocationTimeline(@PathVariable String location)
 	{
+		System.out.println(location);
 		return service.FindLocationTimeline(location);
 	}
 	
@@ -195,11 +227,77 @@ public class CloseupController {
 		return service.FindSituationTimeline(situation);
 	}
 	
-	@PostMapping("/Timeline/Add")
-	@CrossOrigin
+	//@PostMapping("/Timeline/Add")
+	//@CrossOrigin
 	public boolean AddTimeline(@RequestBody Timeline addTimeline)
 	{
 		return service.AddTimeline(addTimeline);
+	}
+	
+	@PostMapping("/Timeline/Add")
+	@CrossOrigin
+	public boolean AddTimeline(@RequestParam(name="mailaddress")String mailaddress,
+							   @RequestParam(name="text")String text,
+							   @RequestPart(name="image")MultipartFile image,
+							   @RequestParam(name="location")String location,
+							   @RequestParam(name="situation")String situation,
+							   @RequestParam(name="nickname")String nickname)
+	{
+		byte[] resizedImageBytes;
+		try 
+		{
+        // Base64デコード
+        //byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+        // 元の画像を指定されたサイズに縦横比を保持しつつリサイズ
+    	// MultipartFileからバイト配列を取得
+    	byte[] imageBytes = image.getBytes();
+
+    	// バイト配列をByteArrayInputStreamにラップしてBufferedImageとして扱う
+    		try (ByteArrayInputStream inputStream = new ByteArrayInputStream(imageBytes)) {
+    			BufferedImage originalImage = ImageIO.read(inputStream);
+    			// リサイズ後のサイズ
+    			int resizedWidth = 200; // リサイズ後の幅
+    			int resizedHeight = 300; // リサイズ後の高さ
+
+    			// リサイズ処理
+    			BufferedImage resizedImage = new BufferedImage(resizedWidth, resizedHeight, BufferedImage.TYPE_INT_RGB);
+    			Graphics2D g2d = resizedImage.createGraphics();
+    			g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    			g2d.drawImage(originalImage, 0, 0, resizedWidth, resizedHeight, null);
+    			g2d.dispose();
+
+    			// BufferedImageをバイト配列に変換してBLOBとして保存するためのデータとして使用する
+    			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    			ImageIO.write(resizedImage, "jpg", baos);
+    			resizedImageBytes = baos.toByteArray();
+    		}
+    		catch(Exception e)
+    		{
+    			System.out.println(e);
+    			return false;
+    		}
+    		
+    		Timeline timeline = new Timeline();
+    		timeline.setMailaddress(mailaddress);
+    		timeline.setText(text);
+    		timeline.setImage(resizedImageBytes);
+    		timeline.setLocation(location);
+    		timeline.setSituation(situation);
+    		timeline.setNickname(nickname);
+    		System.out.println(timeline.mailaddress);
+    		System.out.println(timeline.text);
+    		System.out.println(timeline.image);
+    		System.out.println(timeline.location);
+    		System.out.println(timeline.situation);
+    		System.out.println(timeline.nickname);
+    		System.out.println("正常終了" + timeline.image.length);
+    		return true;
+		}
+    	catch(Exception e)
+    	{
+    		System.out.println(e);
+    		return false;
+    	}
 	}
 	
 	@PostMapping("/Timeline/Delete")
