@@ -13,6 +13,9 @@
     margin: 0 auto;
     padding: 50px;
 }
+.item{
+    display: flex;
+}
 .item-list{
     display: flex;
     justify-content: center;

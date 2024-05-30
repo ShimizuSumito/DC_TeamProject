@@ -1,10 +1,12 @@
-import React, { useState , useEffect, useRef} from 'react'; // ReactとuseStateフックをインポート
+import React, { useState , useEffect, useRef, useContext } from 'react'; // ReactとuseStateフックをインポート
 import { useNavigate } from 'react-router-dom'; // useNavigateフックをインポートしてページ遷移を管理
 import './ClothRegister.css'; // CSSファイルをインポート
 import axios from 'axios';
+import { UserContext } from '../../../App';
 
 export default function ClothRegister() {
   const navigate = useNavigate(); // navigate関数を取得してページ遷移を管理
+  const { userinfo, } = useContext(UserContext);
 
   const [imageData, setImageData] = useState(null);
   const imageDataRef = useRef(null);
@@ -68,7 +70,7 @@ export default function ClothRegister() {
     formData.append('color', selectedButtons.color);
     formData.append('category', 'null');
     formData.append('image', imageData); // ファイルを追加
-    formData.append('mailaddress', 'email@gmail.com');
+    formData.append('mailaddress', userinfo.mailaddress);
 
     console.log('Sending form data:', formData);
     formData.forEach((value, key) => {

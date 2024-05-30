@@ -22,46 +22,22 @@ export default function Choose() {
   });
 
   const handleButtonClick = (category, value) => {
-
     setSelectedButtons({ ...selectedButtons, [category]: value });
   };
-  const toHome=()=>{
+
+  const toHome = () => {
     Navigate("/Main");
   }
+
   const handleSubmit = async () => {
-    console.log('form Data:', formData);
-    Navigate("/Main/Recommend");
-    const dataToSend = {
-      ...formData,
-      ...selectedButtons
-    };
-
-    try {
-      const response = await fetch('YOUR_ENDPOINT_URL', { // エンドポイントのURLを指定してください
-        method: 'POST', // メソッドをPOSTに設定
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const result = await response.json();
-      console.log('Success:', result);
-
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    Navigate("/Main/Recommend", { state: formData });
   };
 
   return (
     <motion.div className="Choose"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6,delay: 0.5}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.5 }}
     >
       <h2>服を選ぶ！</h2>
       <div className="container">
@@ -142,14 +118,14 @@ export default function Choose() {
         <div className='ChooseSubmit'>
           <button onClick={() => {
             setFormData({
-            color: '',
-            location: '',
-            situation: '',
-            temprature: ''
+              color: '',
+              location: '',
+              situation: '',
+              temprature: ''
             });
             toHome()
-           }}
-           >戻る</button>
+          }}
+          >戻る</button>
           <button onClick={handleSubmit} className='OrangeButton'>検索する</button>
         </div>
       </div>
