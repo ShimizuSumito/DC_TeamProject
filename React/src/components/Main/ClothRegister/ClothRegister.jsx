@@ -13,6 +13,7 @@ export default function ClothRegister() {
     location: '',
     situation: '',
     temprature: '',
+    category: ''
   });
 
   const [selectedButtons, setSelectedButtons] = useState({ // ボタンの選択状態を管理
@@ -20,6 +21,7 @@ export default function ClothRegister() {
     location: '',
     situation: '',
     temprature: '',
+    category:''
   });
 
   const [photo, setPhoto] = useState(null); // 写真ファイルの状態を管理
@@ -58,7 +60,7 @@ export default function ClothRegister() {
     formData.append('temperatureRange', selectedButtons.temprature);
     formData.append('situation', selectedButtons.situation);
     formData.append('color', selectedButtons.color);
-    formData.append('category', 'null');
+    formData.append('category', selectedButtons.category);
     formData.append('image', imageData); // ファイルを追加
     formData.append('mailaddress', 'email@gmail.com');
 
@@ -160,6 +162,24 @@ export default function ClothRegister() {
                 }}
               >
                 {temprature} {/* ボタンのラベル */}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="section">
+          <label>衣服の種類</label>
+          <div>
+            {['上着', 'パンツ'].map((category) => ( // 気温のボタンを生成
+              <button
+                className={selectedButtons.category === category ? 'ColorButton active' : 'ColorButton'} // 選択状態に応じてクラスを設定
+                type="button"
+                key={category}
+                onClick={() => {
+                  handleButtonClick('category', category); // ボタンクリック時の処理を設定
+                  setFormData({ ...formData, category }); // フォームデータを更新
+                }}
+              >
+                {category} {/* ボタンのラベル */}
               </button>
             ))}
           </div>
