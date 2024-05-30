@@ -1,27 +1,31 @@
 package com.example.demo.Interface;
 
 public interface TimelineInterface {
-	public String Getmailaddress();
+	public String getmailaddress();
 	
-	public void SetMailaddress(String mailaddress);
+	public void setMailaddress(String mailaddress);
 	
-	public String GetText();
+	public String getText();
 	
-	public void SetText(String text);
+	public void setText(String text);
 	
-	public byte[] GetImage();
+	public byte[] getImage();
 	
-	public void SetImage(byte[] image);
+	public void setImage(byte[] image);
 	
-	public String GetLocation();
+	public String getLocation();
 	
-	public void SetLocation(String location);
+	public void setLocation(String location);
 	
-	public String GetNickname();
+	public String getSituation();
 	
-	public void SetNickname(String nickname);
+	public void setSituation(String situation);
+	
+	public String getNickname();
+	
+	public void setNickname(String nickname);
 
-	public int GetId();
+	public int getId();
 	
-	public void SetId(int id);
+	public void setId(int id);
 }
