@@ -1,10 +1,13 @@
-import React, { useState } from 'react'; // ReactとuseStateフックをインポート
+import React, { useState , useEffect, useRef} from 'react'; // ReactとuseStateフックをインポート
 import { useNavigate } from 'react-router-dom'; // useNavigateフックをインポートしてページ遷移を管理
 import './ClothRegister.css'; // CSSファイルをインポート
+import axios from 'axios';
 
 export default function ClothRegister() {
   const navigate = useNavigate(); // navigate関数を取得してページ遷移を管理
 
+  const [imageData, setImageData] = useState(null);
+  const imageDataRef = useRef(null);
   const [formData, setFormData] = useState({ // フォームデータの状態を管理
     color: '',
     location: '',
@@ -20,50 +23,75 @@ export default function ClothRegister() {
   });
 
   const [photo, setPhoto] = useState(null); // 写真ファイルの状態を管理
+  useEffect(() => {
+    const fetchImageData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/Clothes/Find/9');
+        setPhoto(response.data.image);
+      } catch (error) {
+        console.error('Error fetching image data:', error);
+      }
+    };
+  
+    fetchImageData(); // 関数を即時で呼び出す
+  }, [imageData]);
+  
+  useEffect(() => {
+    // imageDataが更新されたときに実行される処理
+    console.log('ImageData updated:', imageData);
+    
+  }, [imageData]); // imageDataが変更されたときにのみ実行
 
   const handleButtonClick = (category, value) => { // ボタンクリック時の処理
     setSelectedButtons({ ...selectedButtons, [category]: value }); // 選択されたボタンの状態を更新
   };
 
-  const handlePhotoChange = (event) => { // 写真が選択されたときの処理
-    setPhoto(event.target.files[0]); // 選択されたファイルをphoto状態に設定
+  const handlePhotoChange = (event) =>{
+    const file = event.target.files[0];
+    setImageData(file);
+    console.log(imageData);
+    // const reader = new FileReader();
+
+    // reader.onload = function(event) {
+    //   const base64Data = event.target.result.split(',')[1]; // プレフィックスを除外して実際のBase64データを取得
+    //   setImageData(base64Data); // Base64エンコードされたデータを保存
+    // };
+
+    // reader.readAsDataURL(file);
   };
-
+  
   const handleSubmit = async () => {
-    navigate("/Main");  // フォーム送信時の処理
-    console.log('form Data:', formData); // フォームデータをコンソールに出力
+    const formData = new FormData();
+    formData.append('location', selectedButtons.location);
+    formData.append('temperatureRange', selectedButtons.temprature);
+    formData.append('situation', selectedButtons.situation);
+    formData.append('color', selectedButtons.color);
+    formData.append('category', 'null');
+    formData.append('image', imageData); // ファイルを追加
+    formData.append('mailaddress', 'email@gmail.com');
 
-    const dataToSend = new FormData(); // FormDataオブジェクトを作成
-    dataToSend.append('color', selectedButtons.color); // 選択されたカラーを追加
-    dataToSend.append('location', selectedButtons.location); // 選択された行先を追加
-    dataToSend.append('situation', selectedButtons.situation); // 選択されたシチュエーションを追加
-    dataToSend.append('temprature', selectedButtons.temprature); // 選択された気温を追加
-
-    if (photo) { // 写真が選択されている場合
-      dataToSend.append('photo', photo); // 写真を追加
-    }
-
-    for (let [key, value] of dataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
+    console.log('Sending form data:', formData);
+    formData.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+    });
 
     try {
-      const response = await fetch('https://example.com/api/cloth-register', { // Fetch APIを使用してデータを送信
-        method: 'POST', // HTTPメソッドをPOSTに設定
-        body: dataToSend, // 送信するデータ
-      });
+        const response = await axios.post('http://localhost:8080/Clothes/Add', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
 
-      if (!response.ok) { // レスポンスが正常でない場合
-        throw new Error('Network response was not ok'); // エラーを投げる
-      }
-
-      const result = await response.json(); // レスポンスをJSONとして解析
-      console.log('Success:', result); // 成功メッセージをコンソールに出力
-      navigate("/Main"); // "/Main"ページに遷移
+        if (response.status === 200) {
+            navigate("/Main");
+        } else {
+            console.error('Error:', response.statusText);
+        }
     } catch (error) {
-      console.error('Error:', error); // エラーメッセージをコンソールに出力
+        console.error('Error:', error);
     }
-  };
+};
+
 
   return ( // コンポーネントのJSXを返す
     <div className="ClothRegister">
@@ -154,6 +182,10 @@ export default function ClothRegister() {
           }
           )}>戻る</button>
           <button onClick={handleSubmit} className='OrangeButton'>登録する</button> {/* 登録ボタンの処理 */}
+        </div>
+        <div>
+          <h1>Image Display</h1>
+          {imageData && <img src={`data:;base64,${photo}`} alt="Image" />} {/* 画像データを表示 */}
         </div>
       </div>
     </div>

@@ -1,35 +1,35 @@
 package com.example.demo.Interface;
 
 public interface ClothesInterface {
-    public int GetId();
+    public int getId();
     
-    public void SetId(int id);
+    public void setId(int id);
     
-    public String GetLocation();
+    public String getLocation();
     
-    public void SetLocation(String location);
+    public void setLocation(String location);
     
-    public String GetTemperature_range();
+    public String getTemperature_range();
     
-    public void SetTemperature_range(String temperature_range);
+    public void setTemperature_range(String temperature_range);
     
-    public String GetSituation();
+    public String getSituation();
     
-    public void SetSituatuion(String situation);
+    public void setSituatuion(String situation);
     
-    public String GetColor();
+    public String getColor();
     
-    public void SetColor(String color);
+    public void setColor(String color);
     
-    public String GetCategory();
+    public String getCategory();
     
-    public void SetCategory(String category);
+    public void setCategory(String category);
     
-    public byte[] GetImage();
+    public byte[] getImage();
     
-    public void SetImage(byte[] image);
+    public void setImage(byte[] image);
     
-    public String GetMailaddress();
+    public String getMailaddress();
     
-    public void SetMailaddress(String mailaddress);
+    public void setMailaddress(String mailaddress);
 }
