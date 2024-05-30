@@ -220,8 +220,10 @@ public class ClothupService {
         BufferedImage originalImage = ImageIO.read(file.getInputStream());
 
         // 縮小後のサイズを設定
-        int newWidth = 500; // 例として幅を500ピクセルに設定
-        int newHeight = (int) Math.round((double) originalImage.getHeight() / originalImage.getWidth() * newWidth);
+        //int newWidth = 500; // 例として幅を500ピクセルに設定
+        //int newHeight = (int) Math.round((double) originalImage.getHeight() / originalImage.getWidth() * newWidth);
+        int newWidth = (int)(originalImage.getWidth() * 0.5);
+        int newHeight = (int)(originalImage.getHeight() * 0.5);
         	
         // 画像の縮小
         BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);

@@ -1,4 +1,4 @@
-import React, {useContext, useState }from "react";
+import React from "react";
 import "./Home.css";
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,10 +9,8 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import img from "../../../commons/img/notclothes.png";
 import {Link} from 'react-router-dom';
-import  { UserContext }  from "../../../App";
 
 export default function Main() {
-    const { userinfo, } = useContext(UserContext);
     const navigate = useNavigate();
     const toChoose = () => {
         navigate("/Main/Choose");
@@ -29,7 +27,6 @@ export default function Main() {
     const tocreateTimeline = () => {
         navigate("/Main/CreateTimeline");
     }
-    console.log(userinfo);
 
 
     return (

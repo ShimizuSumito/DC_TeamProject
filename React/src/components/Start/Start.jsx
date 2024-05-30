@@ -1,55 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import './Start.css';
-import img from '../../commons/img/logo.png';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { UserContext } from '../../App';
+import img from "../../commons/img/logo.png";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 
 const Start = () => {
-    const location = useLocation();
     const [mailaddress, setMailaddress] = useState('');
     const [password, setPassword] = useState('');
-    const [data, setData] = useState([]);
+    const [data , setData] = useState([]);
     const navigate = useNavigate();
-    const { userinfo, setUserinfo } = useContext(UserContext);
-
     useEffect(() => {
-        fetch('http://localhost:8080/User/Get')
-            .then(res => res.json())
-            .then(value => {
+        fetch('http://localhost:8080/User/Get').then(res => {
+            res.json().then(value => {
                 setData(value);
-                console.log(userinfo);
-            })
-            .catch(err => {
-                console.error(err);
-                alert('サーバー接続に失敗しました。');
-            });
-    }, [setUserinfo]);
+                console.log(value);
+            }) 
+        })
+        .catch(err => {
+            console.error(err);
+    });},[]);
 
-    const handleLogin = () => {
-        if (!mailaddress || !password) {
-            alert('メールアドレスとパスワードを入力してください。');
-            return;
-        }
 
-        let loggedIn = false;
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].mailaddress === mailaddress && data[i].password === password) {
-                navigate('/Main?name=' + data[i].name);
-                setUserinfo(data[i]);
-                loggedIn = true;
-                console.log(userinfo);
-                break;
+        const handleLogin = () => {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].mailaddress === mailaddress && data[i].password === password) {
+                    navigate('/Main?name=' + data[i].name);
+                }
             }
         }
-
-        if (!loggedIn) {
-            alert('メールアドレスまたはパスワードが間違っています。');
+        const handleRegister = () => {
+            navigate('/Register');
         }
-    };
-
-    const handleRegister = () => {
-        navigate('/Register');
-    };
 
     return (
         <div className='start-container'>
@@ -65,11 +46,11 @@ const Start = () => {
                         <form>
                             <label>
                                 メールアドレス
-                                <input type="email" onChange={(e) => setMailaddress(e.target.value)} />
+                                <input type="email" onChange={(e) => setMailaddress(e.target.value)}/>
                             </label>
                             <label>
                                 パスワード
-                                <input type="password" onChange={(e) => setPassword(e.target.value)} />
+                                <input type="password" onChange={(e) => setPassword(e.target.value)}/>
                             </label>
                         </form>
                         <div className='login-buttons'>
@@ -89,7 +70,7 @@ const Start = () => {
                 </section>
             </section>
         </div>
-    );
-};
+    )
+}
 
 export default Start;
