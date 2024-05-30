@@ -1,20 +1,29 @@
 package com.example.demo.Controller;
 
+import java.io.IOException;
+import java.sql.Blob;
+import java.util.Base64;
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Data.Clothes;
+import com.example.demo.Data.TestEntity;
 import com.example.demo.Data.Timeline;
 import com.example.demo.Data.UserDatabase;
-import com.example.demo.Interface.ClothesInterface;
 import com.example.demo.Interface.UserDatabaseInterface;
 import com.example.demo.Service.ClothupService;
 
@@ -74,7 +83,7 @@ public class CloseupController {
 	
 	@GetMapping("/Clothes/Find/{id}")
 	@CrossOrigin
-	public ClothesInterface FindClothes(@PathVariable int id)
+	public Clothes FindClothes(@PathVariable int id)
 	{
 		return service.FindClothes(id);
 	}
@@ -88,10 +97,53 @@ public class CloseupController {
 	
 	@PostMapping("/Clothes/Add")
 	@CrossOrigin
-	public boolean AddClothes(@RequestBody Clothes addClothes)
+    public ResponseEntity<String> addClothes(
+            @RequestParam(name="location") String location,
+            @RequestParam(name="temperatureRange") String temperatureRange,
+            @RequestParam(name="situation") String situation,
+            @RequestParam(name="color") String color,
+            @RequestParam(name="category") String category,
+            @RequestPart(name="image") MultipartFile  base64Image, // Base64エンコードされた画像データを受け取る
+            @RequestParam(name="mailaddress") String mailaddress) throws IOException{
+        try {
+            // Base64デコード
+            //byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+        	byte[] imageData = base64Image.getBytes();
+        	Blob imageBlob = new SerialBlob(imageData);
+            Clothes addClothes = new Clothes();
+            addClothes.setLocation(location);
+            addClothes.setTemperatureRange(temperatureRange);
+            addClothes.setSituation(situation);
+            addClothes.setColor(color);
+            addClothes.setCategory(category);
+            // addClothes.setImage(imageBytes);
+            addClothes.setImage(imageData);
+            addClothes.setMailaddress(mailaddress);
+            service.AddClothes(addClothes);
+            System.out.println(addClothes.getImage().length);
+            return new ResponseEntity<>("Success", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("エラー");
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+	
+	@PostMapping("/Clothes/Add/{imageBase}")
+	@CrossOrigin
+	public boolean AddClothes(@RequestBody Clothes addClothes, @PathVariable String imageBase)
 	{
-		System.out.println("登録");
+		System.out.println(imageBase);
+		addClothes.image = Base64.getDecoder().decode(imageBase);
 		return service.AddClothes(addClothes);
+	}
+	
+	@PostMapping("/Clothes/Add/Test")
+	@CrossOrigin
+	public boolean AddTest(@RequestBody TestEntity test)
+	{
+		System.out.println(test);
+		return true;
 	}
 	
 	@PostMapping("/Clothes/Delete")

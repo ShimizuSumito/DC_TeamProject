@@ -1,14 +1,21 @@
 package com.example.demo.Service;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Data.Clothes;
 import com.example.demo.Data.Timeline;
 import com.example.demo.Data.UserDatabase;
-import com.example.demo.Interface.ClothesInterface;
 import com.example.demo.Interface.UserDatabaseInterface;
 import com.example.demo.Repositories.ClothupClothesRepository;
 import com.example.demo.Repositories.ClothupTimelineRepository;
@@ -80,7 +87,7 @@ public class ClothupService {
 		// TODO 自動生成されたメソッド・スタブ
 		return clothesRepository.findByMailaddress(mailAddress);
 	}
-	public ClothesInterface FindClothes(int id) {
+	public Clothes FindClothes(int id) {
 		return clothesRepository.findById(id);
 	}
 	public boolean AddClothes(Clothes addClothes) {
@@ -207,5 +214,29 @@ public class ClothupService {
 			System.out.println(e);
 			return false;
 		}
-	}
+	}    
+	public byte[] resizeAndConvertToByteArray(MultipartFile file) throws IOException {
+        // 画像の読み込み
+        BufferedImage originalImage = ImageIO.read(file.getInputStream());
+
+        // 縮小後のサイズを設定
+        int newWidth = 500; // 例として幅を500ピクセルに設定
+        int newHeight = (int) Math.round((double) originalImage.getHeight() / originalImage.getWidth() * newWidth);
+        	
+        // 画像の縮小
+        BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = resizedImage.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(originalImage, 0, 0, newWidth, newHeight, null);
+        g.dispose();
+
+        // 縮小した画像をバイト配列に変換
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(resizedImage, "jpg", baos);
+        baos.flush();
+        byte[] byteArray = baos.toByteArray();
+        baos.close();
+
+        return byteArray;
+    }
 }
