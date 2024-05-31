@@ -19,7 +19,8 @@ export default function Recommend() {
         navigate("/Main/CreateTimeline");
     }
 
-    const [images, setImages] = useState([]);
+    const [topsImages, setTopsImages] = useState([]);
+    const [bottomsImages, setBottomsImages] = useState([]);
 
     useEffect(() => {
         const fetchImageData = async () => {
@@ -31,7 +32,9 @@ export default function Recommend() {
                 console.log('chooseData:', chooseData);
 
                 // 渡された要素を含んでいる画像をフィルタリング
-                const filteredImages = [];
+                const filteredTopsImages = [];
+                const filteredBottomsImages = [];
+
                 for (const cloth of response.data) {
                     let matches = true;
                     
@@ -44,23 +47,33 @@ export default function Recommend() {
                     if (chooseData.situation && (!cloth.situation || !cloth.situation.includes(chooseData.situation))) {
                         matches = false;
                     }
-                    if (chooseData.temprature && (!cloth.temepratureRange || !cloth.temperatureRange.includes(chooseData.temprature))) {
+                    if (chooseData.temprature && (!cloth.temperatureRange || !cloth.temperatureRange.includes(chooseData.temprature))) {
                         matches = false;
                     }
 
                     if (matches) {
-                        filteredImages.push({
+                        const imageObject = {
                             src: `data:image/jpeg;base64,${cloth.image}`,
                             alt: cloth.description
-                        });
+                        };
+
+                        if (cloth.category === '上着') {
+                            filteredTopsImages.push(imageObject);
+                        } else if (cloth.category === 'パンツ') {
+                            filteredBottomsImages.push(imageObject);
+                        }
                     }
                 }
 
-                setImages(filteredImages);
-                console.log('Filtered images:', filteredImages); // フィルタリングされた画像を確認
+                setTopsImages(filteredTopsImages);
+                setBottomsImages(filteredBottomsImages);
+
+                console.log('Filtered tops images:', filteredTopsImages); // フィルタリングされた上着画像を確認
+                console.log('Filtered bottoms images:', filteredBottomsImages); // フィルタリングされたパンツ画像を確認
             } catch (error) {
                 console.error('画像データの取得エラー:', error);
-                setImages([]);
+                setTopsImages([]);
+                setBottomsImages([]);
             }
         };
         fetchImageData();
@@ -71,22 +84,37 @@ export default function Recommend() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.5 }}
+        
         >
-            <h1>あなたへのおすすめ</h1>
-            <div className="recommend-container">
-                {/* フィルタリングされた画像を表示 */}
-                <div className="item">
-                    {images.map((image, index) => (
-                        <div key={index} className="item-image">
-                            <img src={image.src} alt={image.alt} />
-                        </div>
-                    ))}
+            <div className='recommend-content'>
+                <h1>あなたへのおすすめ</h1>
+                <div id='tops' className="recommend-container">
+                    {/* フィルタリングされた上着画像を表示 */}
+                    <p>トップス</p>
+                    <div className="item">
+                        {topsImages.map((image, index) => (
+                            <div key={index} className="item-image" style={{ backgroundImage: `url(${image.src})`, backgroundSize: "contain" }} title={image.alt}>
+                                {/* 画像の説明がある場合はツールチップで表示 */}
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+                <div id="bottoms" className="recommend-container">
+                    {/* フィルタリングされたパンツ画像を表示 */}
+                    <p>ボトムス</p>
+                    <div className="item">
+                        {bottomsImages.map((image, index) => (
+                            <div key={index} className="item-image" style={{ backgroundImage: `url(${image.src})`, backgroundSize: "contain" }} title={image.alt}>
+                                {/* 画像の説明がある場合はツールチップで表示 */}
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-            <div className="btn-container">
-                <button onClick={toHome}>ホームへ戻る</button>
-                <button onClick={toCreateTimeline}>写真を投稿する</button>
+                <div className="btn-container">
+                    <button onClick={toHome}>ホームへ戻る</button>
+                    <button onClick={toCreateTimeline}>写真を投稿する</button>
+                </div>
             </div>
         </motion.div>
     )

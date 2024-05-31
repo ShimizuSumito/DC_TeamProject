@@ -291,6 +291,7 @@ public class CloseupController {
     		System.out.println(timeline.situation);
     		System.out.println(timeline.nickname);
     		System.out.println("正常終了" + timeline.image.length);
+    		service.AddTimeline(timeline);
     		return true;
 		}
     	catch(Exception e)

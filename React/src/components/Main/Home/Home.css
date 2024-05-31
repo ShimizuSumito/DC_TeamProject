@@ -4,30 +4,45 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        width: 30%;
+        width: 400px;
         margin: 0 auto;
-
+        margin-top: 30px;
     }
 
     .home-container button {
-        background-color: #F09D71;
-        border: none;
-        color: white;
+        background-color: #fff;
+        border: solid 3px #f09d71;
+        text-decoration: underline #fff 2px;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #f09d71;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
         margin: 4px 2px;
+        padding: 15px 32px;
         cursor: pointer;
     }
+
+    .home-container button:hover {
+        background-color: #f09d71;
+        color: white;
+    }
+
+
+.swiper-slide{
+    width: 200px;
+    height: 300px;
+}
 
 .toMyclothes{
     margin: 30px;
 }
-.toMyclothes :hover{
+/* .toMyclothes :hover{
     border-bottom:solid 3px #F09D71;
-}
+} */
 .home-weather{
     display: flex;
     flex-direction: column;

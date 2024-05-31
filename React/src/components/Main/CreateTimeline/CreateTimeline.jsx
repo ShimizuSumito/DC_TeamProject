@@ -1,8 +1,10 @@
 import './CreateTimeline.css';
 import {useNavigate } from 'react-router-dom';
-import React,{useState, version} from 'react';
+import React,{useState,useContext, version} from 'react';
 import axios from 'axios';
+import { UserContext } from '../../../App';
 export default function CreateTimeline() {
+    const {userinfo} = useContext(UserContext);
     const navigate = useNavigate();
     const [imageData, setImageData] = useState(null);
     const [location, setLocation] = useState(null);
@@ -20,7 +22,7 @@ export default function CreateTimeline() {
         event.preventDefault();
         const formData = new FormData(event.target);
         const sendData = new FormData();
-        sendData.append('mailaddress', "email@gmail.com");
+        sendData.append('mailaddress', userinfo.mailaddress);
         sendData.append('text', formData.get('comment'));
         sendData.append('image', imageData);
         sendData.append('location', formData.get('location'));

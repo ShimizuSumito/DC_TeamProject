@@ -30,22 +30,20 @@
             font-weight: 700;
             margin-bottom: 1rem;
         }
-.item-image{
+.item-image {
     width: 200px;
-    height: 200px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    background: #fff;
-} 
-.recommend .btn-container{
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.btn-container{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
 }
-.recommend button {
+.btn-container button {
     background-color: #F09D71;
     border: none;
     color: white;
@@ -71,4 +69,11 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+.recommend-container p{
+    font-size: 1.2rem;
+    font-weight: bolder
+    ;
+    margin-bottom: 1rem;
+    color: #F09D71;
 }

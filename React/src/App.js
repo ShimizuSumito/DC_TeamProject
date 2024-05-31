@@ -15,13 +15,36 @@ import RegisterSuccess from './components/Start/RegisterSuccess/RegisterSuccess'
 import Mypage from './components/Main/Mypage/Mypage';
 import Recommend from './components/Main/Recommend/Recommend';
 import CreateTimeline from './components/Main/CreateTimeline/CreateTimeline';
-import Loading from './Loading';
 import { AnimatePresence } from 'framer-motion';
+import Lottie, { LottiePlayer } from 'lottie-react';
+import LogoAnimation from './logo2.json';
 
 // ユーザー情報コンテキストの作成
 export const UserContext = createContext();
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    setTimeout(() => {
+      setLoading(false);
+    }, 3200); // Adjust the delay as needed
+  }, []);
+
+  if (loading) {
+    return (
+      <Lottie
+        backgroundSize="cover"
+        animationData={LogoAnimation}
+        background="transparent"
+        style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' ,backgroundColor:'#fff5e4'}}
+        autoplay
+        loop
+      />
+    );
+  }
+
   return (
     <AnimatePresence>
       <Router>
@@ -35,21 +58,6 @@ function AppContent() {
   const location = useLocation();
   const noNavRoutes = ['/', '/Register', '/Check', '/RegisterSuccess'];
   const [userinfo, setUserinfo] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // ローディング状態をシミュレート
-    const loadTimer = setTimeout(() => {
-      setLoading(false);
-    }, 4000); // 4秒後にローディングを終了
-
-    // クリーンアップ関数
-    return () => clearTimeout(loadTimer);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <UserContext.Provider value={{ userinfo, setUserinfo }}>

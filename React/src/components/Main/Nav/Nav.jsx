@@ -52,9 +52,7 @@ const Nav = () => {
                         <li>
                             <Link to="/Main/Mypage" style={{ textDecoration: 'none', color: 'white' }}>アカウント情報</Link>
                         </li>
-                        <li>
-                            <Link to="/Main/timeline" style={{ textDecoration: 'none', color: 'white' }}>お問い合わせ</Link>
-                        </li>
+
                         <li>
                             <Link onClick={resetuserinfo} to="/" style={{ textDecoration: 'none', color: 'white' }}>ログアウト</Link>
                         </li>

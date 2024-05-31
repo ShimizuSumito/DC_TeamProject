@@ -15,7 +15,23 @@ nav ul {
 nav ul li {
     color: white;
     text-decoration: none;
+    display: inline-block;
 }
+
+nav li::after {
+    content: "";
+    display: block;
+    width: 0;
+    transition: width 0.3s;
+    /* border or (height & background) etc.  */
+    border-bottom: 2px solid #fff;
+    border-radius: 4px;
+}
+
+li:hover::after {
+    width: 100%;
+}
+
 .nav{
     position: relative;
 }

@@ -60,7 +60,7 @@ export default function Register() {
                         パスワード
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </label>
-                    <label>性別</label>
+                    <label className='nes'>性別</label>
                     <div class="radio-group">
                         <label>
                             <input type="radio" name="option" value="男性" checked={gender === "男性"} onChange={(e) => setGender("男性")}/>
@@ -75,9 +75,10 @@ export default function Register() {
                             その他
                         </label>
                     </div>
-                    <label className='age'>
+                    <label className='age nes'>
                         年代<br />   
                         <select className='short-select' value={generation} onChange={(e) => setGeneration(e.target.value)}>
+                            <option value="未選択">未選択</option>
                             <option value="10代">10代</option>
                             <option value="20代">20代</option>
                             <option value="30代">30代</option>
@@ -89,9 +90,10 @@ export default function Register() {
                             <option value="90代">90代</option>
                         </select>
                     </label>
-                    <label>
+                    <label className='nes'>
                         地域<br />
                         <select className='short-select' value={region} onChange={(e) => setRegion(e.target.value)}>
+                            <option value="未選択">未選択</option>
                             <option value="札幌">札幌</option>
                             <option value="仙台">仙台</option>
                             <option value="東京">東京</option>
